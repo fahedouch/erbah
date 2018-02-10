@@ -1,3 +1,32 @@
-<p>
-  header works!
-</p>
+<div class="containerHead">
+  <div class="logo">
+    <a>
+      <img src="./assets/img/{{imgLogo}}" alt="logo" height="45" width="150"> </a>
+  </div>
+  <div class="separator"></div>
+  <div class="containerSearch">
+    <input class="mainSearchBar" type="text" placeholder="Search..">
+  </div>
+
+  <div class="containerUserProfil">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>
+      <span class="{{userPicture}}">
+        <img src="./assets/img/picture.png" alt="user picture" height="64" width="64">
+      </span>
+      </mat-icon>
+    </button>
+    <mat-menu class="headerMenu" #menu="matMenu" yPosition="above">
+      <button mat-menu-item>
+        <span class="userName">{{userName}}</span>
+      </button>
+      <button mat-menu-item>
+        <span class="userName">{{userMail}}</span>
+      </button>
+      <button mat-menu-item *ngFor="let menuItem of userMenuList">
+        <i id="icoheader" class="material-icons">{{menuItem.icon}}</i>
+        <span class="itemheader">{{menuItem.itemName}}</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>

@@ -1,3 +1,58 @@
-<p>
-  raking works!
-</p>
+<div class="example-header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="classement">
+      <mat-header-cell *matHeaderCellDef> classement </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.classement}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="P">
+      <mat-header-cell *matHeaderCellDef> P </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.P}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="J">
+      <mat-header-cell *matHeaderCellDef> J </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.J}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="V">
+      <mat-header-cell *matHeaderCellDef> V </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.V}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="N">
+      <mat-header-cell *matHeaderCellDef> N </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.N}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="D">
+      <mat-header-cell *matHeaderCellDef> D </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.D}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="PD">
+      <mat-header-cell *matHeaderCellDef> PD </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.PD}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>
