@@ -1,1 +1,167 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+$blue-ocf: rgb(17, 42, 86);
+$box-shadow: rgb(36, 36, 36);
+$grey:#a19f9f;
+$black:#000000;
+$active-grey:#F2F4F6;
+
+
+// ---------Body CSS ------------
+
+.body-tab-group {
+  border: 1px solid #e8e8e8;
+}
+
+.body-tab-content {
+  padding: 16px;
+}
+
+
+//----------- Classement tab CSS ---------------
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+
+
+//------------------- HEADER CSS ----------------
+
+.containerHead {
+  display: block;
+  background-color: $blue-ocf;
+}
+
+
+.header {
+  position: relative;
+  display: block;
+  min-height: 5.3em;
+  width: 100%;
+  background-color: $blue-ocf;
+  z-index: 1000;
+  box-shadow: 2px -1px 12px $box-shadow;
+  -moz-box-shadow: 2px -1px 12px $box-shadow;
+  -webkit-box-shadow: 2px -1px 12px $box-shadow;
+  padding-bottom: 0.3em;
+
+}
+
+.logo {
+  display: inline-block;
+  margin: 1.188em 0em 0em 0.688em;
+}
+
+.separator {
+  display: inline-block;
+  width: 6.7em;
+}
+
+.containerSearch {
+  display: inline-block;
+}
+
+.mainSearchBar {
+  color: $grey;
+  width: 18em;
+}
+
+.containerUserProfil {
+  width: auto;
+  height: auto;
+  font-size: 0.9em;
+  display: block;
+  float: right;
+  margin-right: 100px;
+  margin-top: 0.9em;
+}
+
+.containerUserProfil .mat-icon-button{
+  width: auto;
+  height: auto;
+  min-width:70px ;
+}
+.containerUserProfil .mat-icon {
+  height: auto;
+  width: auto;
+}
+.containerUserProfil .material-icons{
+  font-size: 14px;
+}
+.containerUserProfil span {
+  display: inline-block;
+  vertical-align: bottom;
+}
+.cdk-overlay-pane {
+  overflow: hidden !important;
+  width: auto;
+  color:$black;
+}
+#icoheader,.itemheader{
+  display: inline-block;
+  vertical-align: middle;
+}
+#icoheader{
+  margin-right: 0.3em;
+}
+
+.userPicture {
+  width: 4.375em;
+  height: 4.375em;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.userPicture img {
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
+
+//--------- Footer CSS ------------
+
+
+.footer {
+  float: left;
+  display: block;
+  height: auto;
+  width: 100%;
+  background-color: $blue-ocf;
+}
+
+.footerPage {
+  width: 100%;
+  margin: 0;
+}
+
+.footerPage li {
+  width: 16%;
+  display: inline-block;
+  color: $active-grey;
+  padding: 1em;
+  vertical-align: middle;
+  margin: 0.3em;
+  text-align: center;
+}

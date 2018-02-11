@@ -1,3 +1,33 @@
-<p>
-<app-raking></app-raking>
-</p>
+<mat-card>
+  <mat-card-content>
+    <h2></h2>
+    <mat-tab-group class="body-tab-group">
+      <mat-tab [label]="'home' | translate" >
+        <div class="body-tab-content">
+
+        </div>
+      </mat-tab>
+      <mat-tab [label]="'raking' | translate">
+        <div class="body-tab-content">
+          <app-raking></app-raking>
+        </div>
+      </mat-tab>
+      <mat-tab [label]="'match' | translate">
+        <div class="body-tab-content">
+          <app-raking></app-raking>
+        </div>
+      </mat-tab>
+      <mat-tab [label]="'rules' | translate">
+        No content
+      </mat-tab>
+      <mat-tab [label]="'Erbah' | translate">
+        No content
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>
+
+
+
+
+
