@@ -4,7 +4,7 @@ import {MatPaginator, MatTableDataSource } from "@angular/material";
 @Component({
   selector: 'app-raking',
   templateUrl: './raking.component.html',
-  styleUrls: ['./raking.component.scss']
+  styleUrls: []
 })
 export class RakingComponent  {
 
