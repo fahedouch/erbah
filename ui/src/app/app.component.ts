@@ -18,5 +18,5 @@ export class AppComponent {
     translate.use('fr');
   }
 
-  title = 'erbah';
+  title = 'app';
 }
