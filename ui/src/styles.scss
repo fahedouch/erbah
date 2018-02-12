@@ -69,7 +69,8 @@ $active-grey:#F2F4F6;
 
 .logo {
   display: inline-block;
-  margin: 1.188em 0em 0em 0.688em;
+  margin: 1.188em 2em 0em 0.70em;
+  float: right;
 }
 
 .separator {
@@ -91,9 +92,9 @@ $active-grey:#F2F4F6;
   height: auto;
   font-size: 0.9em;
   display: block;
-  float: right;
   margin-right: 100px;
-  margin-top: 0.9em;
+  margin-top: 0.0em;
+  margin-left: 50px;
 }
 
 .containerUserProfil .mat-icon-button{
