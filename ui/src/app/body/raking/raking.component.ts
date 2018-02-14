@@ -1,54 +1,70 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatTableDataSource } from "@angular/material";
+import {Component, AfterViewInit, ViewChild, } from '@angular/core';
+import {MatPaginator, MatTableDataSource , MatPaginatorIntl } from "@angular/material";
+
 
 @Component({
   selector: 'app-raking',
   templateUrl: './raking.component.html',
   styleUrls: []
 })
-export class RakingComponent  {
+export class RakingComponent extends MatPaginatorIntl implements AfterViewInit   {
 
-  displayedColumns = ['classement', 'P', 'J', 'V','N','D','PD'];
+  displayedColumns = ['raking', 'P', 'J', 'V','N','D','BP','BC','DF','P_pourcent'];
   dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
 
+  // TODO integrate paginator label in traduction system ng translate
+  itemsPerPageLabel = "nombre ditem par page";
+  nextPageLabel     = 'page suivante';
+  previousPageLabel = 'Page precedente';
+  lastPageLabel     = 'dernière page';
+  firstPageLabel    = 'première page';
+
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  constructor() {
+    super();
+  }
 
-  constructor() { }
-
-  /**
-   * Set the paginator after the view init since this component will
-   * be able to query its view for the initialized paginator.
-   */
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
+  selected = 'Cycle10 / 04.11.2015 - 04.12.2015';
+  tournaments = [
+    {value: 'tournoi1', viewValue: 'Cycle10 / 04.11.2015 - 04.12.2015'},
+    {value: 'tournoi2', viewValue: 'Cycle11 / 04.11.2015 - 04.12.2015'},
+    {value: 'tournoi3', viewValue: 'Cycle12 / 04.11.2015 - 04.12.2015'}
+  ];
 
 }
 
 export interface Element {
-  classement: string;
-  P: string;
-  J: string;
-  V: string;
-  N: string;
-  D: string;
-  PD: number;
+  raking: string;
+  P: number;
+  J: number;
+  V: number;
+  N: number;
+  D: number;
+  BP: number;
+  BC : number;
+  DF : number;
+  P_pourcent: any;
 }
 
 const ELEMENT_DATA: Element[] = [
-  {classement: 'samir', P: 'Hydrogen', J :'', V:'', N:'', D:'', PD: 1.0079},
-{classement: 'ahmed', P: 'Hydrogen', J :'', V:'', N:'', D:'', PD: 1.0079},
-{classement: 'karim', P: 'Hydrogen', J :'', V:'', N:'', D:'', PD: 1.0079},
-{classement: 'aude', P: 'Hydrogen', J :'', V:'', N:'', D:'', PD : 1.0079},
-{classement: 'alain', P: 'Hydrogen', J :'', V:'', N:'', D:'', PD: 1.0079},
-{classement: 'tot', P: 'Hydrogen', J :'', V:'', N:'', D:'', PD : 1.0079},
-{classement: 'tito', P: 'Hydrogen', J :'', V:'', N:'', D:'', PD : 1.0079},
-{classement: 'iram', P: 'Hydrogen', J :'', V:'', N:'', D:'', PD : 1.0079},
+  {raking: 'samir', P: 5, J :2 , V: 3, N: 4 , D: 5, BP: 1 , BC : 4 , DF : 8 , P_pourcent :4.6  },
+  {raking: 'adin', P: 7 , J :2 , V: 3, N: 4 , D: 5, BP: 1 , BC : 4 , DF : 8 , P_pourcent :4.6  },
+  {raking: 'aude', P: 4, J :2 , V: 3, N: 4 , D: 5, BP: 1 , BC : 4 , DF : 8 , P_pourcent :4.6  },
+  {raking: 'toto', P: 8, J :2 , V: 3, N: 4 , D: 5, BP: 1 , BC : 4 , DF : 8 , P_pourcent :4.6  },
+  {raking: 'titi', P: 9, J :2 , V: 3, N: 4 , D: 5, BP: 1 , BC : 4 , DF : 8 , P_pourcent :4.6  },
+  {raking: 'cresto', P: 23, J :2 , V: 3, N: 4 , D: 5, BP: 1 , BC : 4 , DF : 8 , P_pourcent :4.6  },
+  {raking: 'alem', P: 0, J :2 , V: 3, N: 4 , D: 5, BP: 1 , BC : 4 , DF : 8 , P_pourcent :4.6  },
+  {raking: 'ahmed', P: 6, J :2 , V: 3, N: 4 , D: 5, BP: 1 , BC : 4 , DF : 8 , P_pourcent :4.6  },
 
 ];
 

@@ -4,5 +4,14 @@
   "rules" : "guide",
   "match" : "match",
   "Erbah": "Erbah",
-  "copyright" : "©Copyright 2001-2017  - Tous droits réservés CGV"
+  "copyright" : "©Copyright 2001-2017  - Tous droits réservés CGV",
+  "itemsPerPageLabel" :  "Nombre d'item par page",
+  "nextPageLabel"     : "Page suivante",
+  "previousPageLabel" : "Page précedente",
+  "lastPageLabel"     : "Première page",
+  "firstPageLabel"    : "Dernière page",
+  "filter" : "filtre",
+  "raking" : "classement",
+  "tournament" : "tournoi" ,
+  "tournaments" : "tournois"
 }
