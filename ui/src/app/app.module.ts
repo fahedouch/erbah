@@ -28,7 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorIntl } from "@angular/material";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -63,6 +64,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTableModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatPaginatorModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -72,7 +74,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
 
   ],
-  providers: [],
+  providers: [{ provide: MatPaginatorIntl, useClass: RakingComponent}],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

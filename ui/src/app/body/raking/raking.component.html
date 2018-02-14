@@ -1,6 +1,14 @@
-<div class="example-header">
+<mat-form-field>
+  <mat-select [placeholder]="'tournaments' | translate" >
+    <mat-option *ngFor="let tournament of tournaments" [value]="tournament.value">
+      {{ tournament.viewValue }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div class="filter-header">
   <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    <input  (keyup)="applyFilter($event.target.value)" matInput [placeholder]="'filter' | translate">
   </mat-form-field>
 </div>
 
@@ -8,9 +16,9 @@
   <mat-table #table [dataSource]="dataSource">
 
     <!-- Position Column -->
-    <ng-container matColumnDef="classement">
-      <mat-header-cell *matHeaderCellDef> classement </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.classement}} </mat-cell>
+    <ng-container matColumnDef="raking">
+      <mat-header-cell *matHeaderCellDef> {{ 'raking' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.raking}} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
@@ -42,17 +50,32 @@
     </ng-container>
 
 
-    <ng-container matColumnDef="PD">
-      <mat-header-cell *matHeaderCellDef> PD </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.PD}} </mat-cell>
+    <ng-container matColumnDef="BP">
+      <mat-header-cell *matHeaderCellDef> BP </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.BP}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="BC">
+      <mat-header-cell *matHeaderCellDef> BC </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.BC}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="DF">
+      <mat-header-cell *matHeaderCellDef> DF </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.DF}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="P_pourcent">
+      <mat-header-cell *matHeaderCellDef> P% </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.P_pourcent}} </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
   <mat-paginator #paginator
-                 [pageSize]="10"
-                 [pageSizeOptions]="[5, 10, 20]"
+                 [pageSize]="5"
+                 [pageSizeOptions]="[6, 10, 20]"
                  [showFirstLastButtons]="true">
   </mat-paginator>
 </div>

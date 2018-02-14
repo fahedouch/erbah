@@ -5,6 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { RakingComponent } from './raking.component';
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {HttpLoaderFactory} from "../../app.module";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 describe('RakingComponent', () => {
   let component: RakingComponent;
@@ -14,7 +17,13 @@ describe('RakingComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ RakingComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports:[MaterialModule,BrowserAnimationsModule]
+      imports:[MaterialModule,BrowserAnimationsModule,HttpClientModule,TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      })]
     })
     .compileComponents();
   }));
