@@ -11,6 +11,7 @@ public class RankingController extends Controller{
 
     /**
      *
+     * @param id
      * @return
      */
     public Result getRankingBytournementId(int id) {
