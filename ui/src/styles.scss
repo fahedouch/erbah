@@ -22,7 +22,7 @@ $active-grey:#F2F4F6;
 
 //----------- Classement tab CSS ---------------
 
-.example-container {
+.ranking-container {
   display: flex;
   flex-direction: column;
   min-width: 300px;
@@ -43,7 +43,30 @@ $active-grey:#F2F4F6;
   max-height: 500px;
 }
 
+.ranking-container  mat-header-cell {
+  display:flex;
+  justify-content:center;
+}
 
+.ranking-container mat-cell {
+  display:flex;
+  justify-content:center;
+}
+//----------- Header tab CSS ---------------
+
+.match-container {
+  display: flex;
+  flex-direction: column;
+}
+.match-container  mat-header-cell {
+  display:flex;
+  justify-content:center;
+}
+
+.match-container mat-cell {
+  display:flex;
+  justify-content:center;
+}
 
 //------------------- HEADER CSS ----------------
 

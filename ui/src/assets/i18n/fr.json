@@ -13,5 +13,8 @@
   "filter" : "filtre",
   "raking" : "classement",
   "tournament" : "tournoi" ,
-  "tournaments" : "tournois"
+  "tournaments" : "tournois",
+  "Player1" : "Joueur 1",
+  "Player2" : "Joueur 2",
+  "Result"  : "Resultat"
 }
