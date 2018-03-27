@@ -8,6 +8,8 @@ import { RakingComponent } from './raking.component';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpLoaderFactory} from "../../app.module";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {MatPaginatorIntl} from "@angular/material";
+import {DataService} from "../../services/data.service";
 
 describe('RakingComponent', () => {
   let component: RakingComponent;
@@ -23,7 +25,9 @@ describe('RakingComponent', () => {
           useFactory: HttpLoaderFactory,
           deps: [HttpClient]
         }
-      })]
+      })],
+      providers: [DataService]
+
     })
     .compileComponents();
   }));
