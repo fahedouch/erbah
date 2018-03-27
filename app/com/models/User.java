@@ -1,5 +1,7 @@
 package com.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
@@ -27,47 +29,38 @@ public class User implements Serializable {
 	@Column(name="user_password")
 	private String userPassword;
 
-	@Column(name="user_point")
-	private String userPoint;
-
-	//bi-directional many-to-many association to Match
+	//bi-directional many-to-many association to Footmatch
+    @JsonIgnore
 	@ManyToMany
 	@JoinTable(
-		name="user_match"
+		name="user_footmatch"
 		, joinColumns={
-			@JoinColumn(referencedColumnName="user_id")
+			@JoinColumn(name="user_id",referencedColumnName="user_id")
 			}
 		, inverseJoinColumns={
-			@JoinColumn(referencedColumnName="match_id")
+			@JoinColumn(name="match_id",referencedColumnName="match_id")
 			}
 		)
-	private List<Match> matches;
-
-	//bi-directional many-to-many association to Ranking
-	@ManyToMany
-	@JoinTable(
-		name="user_ranking"
-		, joinColumns={
-			@JoinColumn(referencedColumnName="user_id")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(referencedColumnName="ranking_id")
-			}
-		)
-	private List<Ranking> rankings;
+	private List<Footmatch> footmatches;
 
 	//bi-directional many-to-many association to Tournement
+    @JsonIgnore
 	@ManyToMany
 	@JoinTable(
 		name="user_tournement"
 		, joinColumns={
-			@JoinColumn(referencedColumnName="user_id")
+			@JoinColumn(name="user_id",referencedColumnName="user_id")
 			}
 		, inverseJoinColumns={
-			@JoinColumn(referencedColumnName="tournement_id")
+			@JoinColumn(name="tournement_id",referencedColumnName="tournement_id")
 			}
 		)
 	private List<Tournement> tournements;
+
+	//bi-directional many-to-one association to UserTournement
+    @JsonIgnore
+	@OneToMany(mappedBy="user")
+	private List<UserTournement> userTournements;
 
 	public User() {
 	}
@@ -104,28 +97,12 @@ public class User implements Serializable {
 		this.userPassword = userPassword;
 	}
 
-	public String getUserPoint() {
-		return this.userPoint;
+	public List<Footmatch> getFootmatches() {
+		return this.footmatches;
 	}
 
-	public void setUserPoint(String userPoint) {
-		this.userPoint = userPoint;
-	}
-
-	public List<Match> getMatches() {
-		return this.matches;
-	}
-
-	public void setMatches(List<Match> matches) {
-		this.matches = matches;
-	}
-
-	public List<Ranking> getRankings() {
-		return this.rankings;
-	}
-
-	public void setRankings(List<Ranking> rankings) {
-		this.rankings = rankings;
+	public void setFootmatches(List<Footmatch> footmatches) {
+		this.footmatches = footmatches;
 	}
 
 	public List<Tournement> getTournements() {
@@ -134,6 +111,28 @@ public class User implements Serializable {
 
 	public void setTournements(List<Tournement> tournements) {
 		this.tournements = tournements;
+	}
+
+	public List<UserTournement> getUserTournements() {
+		return this.userTournements;
+	}
+
+	public void setUserTournements(List<UserTournement> userTournements) {
+		this.userTournements = userTournements;
+	}
+
+	public UserTournement addUserTournement(UserTournement userTournement) {
+		getUserTournements().add(userTournement);
+		userTournement.setUser(this);
+
+		return userTournement;
+	}
+
+	public UserTournement removeUserTournement(UserTournement userTournement) {
+		getUserTournements().remove(userTournement);
+		userTournement.setUser(null);
+
+		return userTournement;
 	}
 
 }

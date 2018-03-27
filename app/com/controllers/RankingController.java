@@ -1,23 +1,32 @@
 package com.controllers;
 
-import com.models.User;
+import play.libs.Json;
 import play.mvc.*;
 
-import java.util.List;
 import com.services.RankingService;
 
 
 public class RankingController extends Controller{
 
+
     /**
-     *
+     * get User Tournaments By Tournament Id
      * @param id
      * @return
      */
-    public Result getRankingBytournementId(int id) {
+    public Result getUserTournamentsTournamentById(int id) {
         RankingService rankingService = new RankingService();
-        System.out.println(rankingService.getRankingBytournementId(id));
-        return ok();
+        return ok(Json.toJson(rankingService.getTournamentById(id).getUserTournements()).toString());
+    }
+
+    /**
+     * get the last 2 tournament
+     * @return Json of the last 2 tounrment
+     */
+    public Result getTournament() {
+        RankingService rankingService = new RankingService();
+
+        return ok(Json.toJson((rankingService.getTournament())).toString());
     }
 
 }

@@ -1,5 +1,7 @@
 package com.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
@@ -24,17 +26,20 @@ public class Tournement implements Serializable {
 	@Column(name="tournement_date_start")
 	private String tournementDateStart;
 
-	//bi-directional many-to-one association to Match
+	//bi-directional many-to-one association to Footmatch
+    @JsonIgnore
 	@OneToMany(mappedBy="tournement")
-	private List<Match> matches;
-
-	//bi-directional many-to-one association to Ranking
-	@OneToMany(mappedBy="tournement")
-	private List<Ranking> rankings;
+	private List<Footmatch> footmatches;
 
 	//bi-directional many-to-many association to User
+    @JsonIgnore
 	@ManyToMany(mappedBy="tournements")
 	private List<User> users;
+
+	//bi-directional many-to-one association to UserTournement
+    @JsonIgnore
+	@OneToMany(mappedBy="tournement")
+	private List<UserTournement> userTournements;
 
 	public Tournement() {
 	}
@@ -63,48 +68,26 @@ public class Tournement implements Serializable {
 		this.tournementDateStart = tournementDateStart;
 	}
 
-	public List<Match> getMatches() {
-		return this.matches;
+	public List<Footmatch> getFootmatches() {
+		return this.footmatches;
 	}
 
-	public void setMatches(List<Match> matches) {
-		this.matches = matches;
+	public void setFootmatches(List<Footmatch> footmatches) {
+		this.footmatches = footmatches;
 	}
 
-	public Match addMatch(Match match) {
-		getMatches().add(match);
-		match.setTournement(this);
+	public Footmatch addFootmatch(Footmatch footmatch) {
+		getFootmatches().add(footmatch);
+		footmatch.setTournement(this);
 
-		return match;
+		return footmatch;
 	}
 
-	public Match removeMatch(Match match) {
-		getMatches().remove(match);
-		match.setTournement(null);
+	public Footmatch removeFootmatch(Footmatch footmatch) {
+		getFootmatches().remove(footmatch);
+		footmatch.setTournement(null);
 
-		return match;
-	}
-
-	public List<Ranking> getRankings() {
-		return this.rankings;
-	}
-
-	public void setRankings(List<Ranking> rankings) {
-		this.rankings = rankings;
-	}
-
-	public Ranking addRanking(Ranking ranking) {
-		getRankings().add(ranking);
-		ranking.setTournement(this);
-
-		return ranking;
-	}
-
-	public Ranking removeRanking(Ranking ranking) {
-		getRankings().remove(ranking);
-		ranking.setTournement(null);
-
-		return ranking;
+		return footmatch;
 	}
 
 	public List<User> getUsers() {
@@ -113,6 +96,28 @@ public class Tournement implements Serializable {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+	public List<UserTournement> getUserTournements() {
+		return this.userTournements;
+	}
+
+	public void setUserTournements(List<UserTournement> userTournements) {
+		this.userTournements = userTournements;
+	}
+
+	public UserTournement addUserTournement(UserTournement userTournement) {
+		getUserTournements().add(userTournement);
+		userTournement.setTournement(this);
+
+		return userTournement;
+	}
+
+	public UserTournement removeUserTournement(UserTournement userTournement) {
+		getUserTournements().remove(userTournement);
+		userTournement.setTournement(null);
+
+		return userTournement;
 	}
 
 }

@@ -1,8 +1,9 @@
 package com.services;
 
+import com.models.Tournement;
 import io.ebean.*;
-import com.models.User;
-import java.util.*;
+import java.util.List;
+
 
 
 /**
@@ -11,31 +12,28 @@ import java.util.*;
 public class RankingDao {
 
     /**
-     *
-     * @return  ranking
+     * get  tounrmenent by Id
+     * @param tournamentId
+     * @return
      */
-    public List<User> getRankingBytournementId(int tournementId ){
+    public Tournement getTournamentById(int tournamentId ){
 
-        String sql = "SELECT user_name , user_email FROM user u  " +
-                "INNER JOIN user_ranking ON user_ranking.user_id = u.user_id " +
-                "INNER JOIN ranking ON  ranking.ranking_id = user_ranking.ranking_id " +
-                "INNER JOIN tournement ON tournement.tournement_id = ranking.tournement_id AND tournement.tournement_id = :tournementId ";
+        Tournement tournamentById = Ebean.find(Tournement.class)
+                .fetch("userTournements").order().desc("userTournements.userPoint")
+                .where().eq("tournementId",tournamentId)
+                .findOne();
+        return tournamentById;
+    }
 
-
-        RawSql rawSql = RawSqlBuilder.parse(sql)
-                .tableAliasMapping("u", "user")
-                .tableAliasMapping("ur", "user_ranking")
-                .tableAliasMapping("r", "ranking")
-                .create();
-
-        List<User> RankingBytournementId = Ebean.find(User.class)
-               .setRawSql(rawSql)
-               .setParameter("tournementId", tournementId)
+    /**
+     * get the last 2 tounrment
+     * @return tournements
+     */
+    public List<Tournement> getTournament(){
+        List<Tournement> tournaments = Ebean.find(Tournement.class).setMaxRows(2)
                 .findList();
 
-       // List<User> RankingBytournementId = Ebean.find(User.class).select("useName")
-              //  .findList();
-
-        return RankingBytournementId;
+        return tournaments;
     }
+
 }

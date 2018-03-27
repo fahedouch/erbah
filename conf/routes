@@ -3,5 +3,7 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /api/ranking/:id                        com.controllers.RankingController.getRankingBytournementId(id :Integer)
 
+GET     /api/UserTournamentsTournament/:id                        com.controllers.RankingController.getUserTournamentsTournamentById(id :Integer)
+
+GET     /api/Tournament                              com.controllers.RankingController.getTournament()

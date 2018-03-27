@@ -1,17 +1,19 @@
 package com.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
 
 /**
- * The persistent class for the match database table.
+ * The persistent class for the footmatch database table.
  * 
  */
 @Entity
-@NamedQuery(name="Match.findAll", query="SELECT m FROM Match m")
-public class Match implements Serializable {
+@NamedQuery(name="Footmatch.findAll", query="SELECT f FROM Footmatch f")
+public class Footmatch implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -25,15 +27,17 @@ public class Match implements Serializable {
 	private String matchDateStart;
 
 	//bi-directional many-to-one association to Tournement
+    @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="tournement_id")
 	private Tournement tournement;
 
 	//bi-directional many-to-many association to User
-	@ManyToMany(mappedBy="matches")
+    @JsonIgnore
+	@ManyToMany(mappedBy="footmatches")
 	private List<User> users;
 
-	public Match() {
+	public Footmatch() {
 	}
 
 	public int getMatchId() {
