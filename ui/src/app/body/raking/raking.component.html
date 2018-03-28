@@ -1,4 +1,4 @@
-  <mat-select   [placeholder]="'tournaments' | translate" >
+<mat-select   [placeholder]="'tournaments' | translate" >
     <mat-option *ngFor="let tournament of tournaments" (click)="loadUserTournamentsTournamentById(tournament.tournementId)"   [value]="tournament.tournementId">
       {{ tournament.tournementDateStart }} - {{ tournament.tournementDateEnd }}
     </mat-option>
@@ -8,7 +8,9 @@
     <input  (keyup)="applyFilter($event.target.value)" matInput [placeholder]="'filter' | translate">
   </mat-form-field>
 </div>
-<div class="example-container mat-elevation-z8">
+
+<div class="ranking-container mat-elevation-z8">
+
   <mat-table #table [dataSource]="dataSource">
     <!-- Position Column -->
     <ng-container matColumnDef="userName">
