@@ -35,9 +35,7 @@ export class MatchComponent extends MatPaginatorIntl implements AfterViewInit {
   }
   selected = 'Cycle10 / 04.11.2015 - 04.12.2015';
   tournaments = [
-    {value: 'tournoi1', viewValue: 'Cycle10 / 04.11.2015 - 04.12.2015'},
-    {value: 'tournoi2', viewValue: 'Cycle11 / 04.11.2015 - 04.12.2015'},
-    {value: 'tournoi3', viewValue: 'Cycle12 / 04.11.2015 - 04.12.2015'}
+    {value: 'tournoi1', viewValue: 'Cycle10 / 04.11.2015 - 04.12.2015'}
   ];
 
 }
