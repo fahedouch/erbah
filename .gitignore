@@ -64,4 +64,5 @@ hier.code-workspace
 /.vscode
 .idea
 
+conf/application.conf
 erbah/.g8/form/form.iml
