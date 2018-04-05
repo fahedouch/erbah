@@ -27,15 +27,17 @@ public class Footmatch implements Serializable {
 	private String matchDateStart;
 
 	//bi-directional many-to-one association to Tournement
-    @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="tournement_id")
 	private Tournement tournement;
 
 	//bi-directional many-to-many association to User
-    @JsonIgnore
 	@ManyToMany(mappedBy="footmatches")
 	private List<User> users;
+
+	//bi-directional many-to-one association to UserFootmatch
+	@OneToMany(mappedBy="footmatch")
+	private List<UserFootmatch> userFootmatches;
 
 	public Footmatch() {
 	}
@@ -78,6 +80,28 @@ public class Footmatch implements Serializable {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+	public List<UserFootmatch> getUserFootmatches() {
+		return this.userFootmatches;
+	}
+
+	public void setUserFootmatches(List<UserFootmatch> userFootmatches) {
+		this.userFootmatches = userFootmatches;
+	}
+
+	public UserFootmatch addUserFootmatch(UserFootmatch userFootmatch) {
+		getUserFootmatches().add(userFootmatch);
+		userFootmatch.setFootmatch(this);
+
+		return userFootmatch;
+	}
+
+	public UserFootmatch removeUserFootmatch(UserFootmatch userFootmatch) {
+		getUserFootmatches().remove(userFootmatch);
+		userFootmatch.setFootmatch(null);
+
+		return userFootmatch;
 	}
 
 }

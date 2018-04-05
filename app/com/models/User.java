@@ -30,15 +30,15 @@ public class User implements Serializable {
 	private String userPassword;
 
 	//bi-directional many-to-many association to Footmatch
-    @JsonIgnore
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(
 		name="user_footmatch"
 		, joinColumns={
-			@JoinColumn(name="user_id",referencedColumnName="user_id")
+			@JoinColumn(name="user_id" , referencedColumnName = "user_id")
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="match_id",referencedColumnName="match_id")
+			@JoinColumn(name="match_id", referencedColumnName="match_id")
 			}
 		)
 	private List<Footmatch> footmatches;
@@ -49,13 +49,18 @@ public class User implements Serializable {
 	@JoinTable(
 		name="user_tournement"
 		, joinColumns={
-			@JoinColumn(name="user_id",referencedColumnName="user_id")
+			@JoinColumn(name="user_id" , referencedColumnName ="user_id" )
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="tournement_id",referencedColumnName="tournement_id")
+			@JoinColumn(name="tournement_id" , referencedColumnName="tournement_id")
 			}
 		)
 	private List<Tournement> tournements;
+
+	//bi-directional many-to-one association to UserFootmatch
+    @JsonIgnore
+	@OneToMany(mappedBy="user")
+	private List<UserFootmatch> userFootmatches;
 
 	//bi-directional many-to-one association to UserTournement
     @JsonIgnore
@@ -111,6 +116,28 @@ public class User implements Serializable {
 
 	public void setTournements(List<Tournement> tournements) {
 		this.tournements = tournements;
+	}
+
+	public List<UserFootmatch> getUserFootmatches() {
+		return this.userFootmatches;
+	}
+
+	public void setUserFootmatches(List<UserFootmatch> userFootmatches) {
+		this.userFootmatches = userFootmatches;
+	}
+
+	public UserFootmatch addUserFootmatch(UserFootmatch userFootmatch) {
+		getUserFootmatches().add(userFootmatch);
+		userFootmatch.setUser(this);
+
+		return userFootmatch;
+	}
+
+	public UserFootmatch removeUserFootmatch(UserFootmatch userFootmatch) {
+		getUserFootmatches().remove(userFootmatch);
+		userFootmatch.setUser(null);
+
+		return userFootmatch;
 	}
 
 	public List<UserTournement> getUserTournements() {

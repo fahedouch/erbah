@@ -1,6 +1,6 @@
   <mat-select  [placeholder]="'tournaments' | translate"  >
-    <mat-option *ngFor="let tournament of tournaments" [value]="tournament.value">
-      {{ tournament.viewValue }}
+    <mat-option *ngFor="let tournament of tournaments" (click)="loadMatchsTournamentById(tournament.tournementId)"   [value]="tournament.tournementId">
+      {{ tournament.tournementDateStart }} - {{ tournament.tournementDateEnd }}
     </mat-option>
   </mat-select>
 

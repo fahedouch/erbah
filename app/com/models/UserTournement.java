@@ -47,13 +47,12 @@ public class UserTournement implements Serializable {
 	private int userVictory;
 
 	//bi-directional many-to-one association to Tournement
-    @JsonIgnore
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="tournement_id")
 	private Tournement tournement;
 
 	//bi-directional many-to-one association to User
-    @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
