@@ -6,6 +6,7 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {HttpLoaderFactory} from "../../app.module";
 import {MaterialModule} from "../../material.module";
+import {DataService} from "../../services/data.service";
 
 describe('MatchComponent', () => {
   let component: MatchComponent;
@@ -21,7 +22,8 @@ describe('MatchComponent', () => {
           useFactory: HttpLoaderFactory,
           deps: [HttpClient]
         }
-      })]
+      })],
+      providers: [DataService]
     })
     .compileComponents();
   }));

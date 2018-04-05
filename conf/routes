@@ -6,4 +6,6 @@
 
 GET     /api/UserTournamentsTournament/:id                        com.controllers.RankingController.getUserTournamentsTournamentById(id :Integer)
 
+GET     /api/MatchTournament/:id                        com.controllers.MatchController.getMatchByTournamentId(id :Integer)
+
 GET     /api/Tournament                              com.controllers.RankingController.getTournament()

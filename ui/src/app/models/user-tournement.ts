@@ -45,107 +45,108 @@ export class UserTournement {
   @ManyToOne(type => UserTournement, x => x._userId)
   _user: User;
 
-  get userId(): number {
+
+  public get userId(): number {
     return this._userId;
   }
 
-  set userId(value: number) {
+  public set userId(value: number) {
     this._userId = value;
   }
 
-  get tournementId(): number {
+  public get tournementId(): number {
     return this._tournementId;
   }
 
-  set tournementId(value: number) {
+  public set tournementId(value: number) {
     this._tournementId = value;
   }
 
-  get userPoint(): number {
+  public get userPoint(): number {
     return this._userPoint;
   }
 
-  set userPoint(value: number) {
+  public set userPoint(value: number) {
     this._userPoint = value;
   }
 
-  get userVictory(): number {
+  public get userVictory(): number {
     return this._userVictory;
   }
 
-  set userVictory(value: number) {
+  public set userVictory(value: number) {
     this._userVictory = value;
   }
 
-  get userNull(): number {
+  public get userNull(): number {
     return this._userNull;
   }
 
-  set userNull(value: number) {
+  public set userNull(value: number) {
     this._userNull = value;
   }
 
-  get userDefeat(): number {
+  public get userDefeat(): number {
     return this._userDefeat;
   }
 
-  set userDefeat(value: number) {
+  public set userDefeat(value: number) {
     this._userDefeat = value;
   }
 
-  get userGoalScored(): number {
+  public get userGoalScored(): number {
     return this._userGoalScored;
   }
 
-  set userGoalScored(value: number) {
+  public set userGoalScored(value: number) {
     this._userGoalScored = value;
   }
 
-  get userDifference(): number {
+  public get userDifference(): number {
     return this._userDifference;
   }
 
-  set userDifference(value: number) {
+  public set userDifference(value: number) {
     this._userDifference = value;
   }
 
-  get userGoalByMatch(): number {
+  public get userGoalByMatch(): number {
     return this._userGoalByMatch;
   }
 
-  set userGoalByMatch(value: number) {
+  public set userGoalByMatch(value: number) {
     this._userGoalByMatch = value;
   }
 
-  get userAcceptedGoal(): number {
+  public get userAcceptedGoal(): number {
     return this._userAcceptedGoal;
   }
 
-  set userAcceptedGoal(value: number) {
+  public set userAcceptedGoal(value: number) {
     this._userAcceptedGoal = value;
   }
 
-  get userName(): string {
+  public get userName(): string {
     return this._userName;
   }
 
-  set userName(value: string) {
+  public set userName(value: string) {
     this._userName = value;
   }
 
-  get tournement(): Tournement {
+  public get tournement(): Tournement {
     return this._tournement;
   }
 
-  set tournement(value: Tournement) {
+  public set tournement(value: Tournement) {
     this._tournement = value;
   }
 
-  get user(): User {
+  public get user(): User {
     return this._user;
   }
 
-  set user(value: User) {
+  public set user(value: User) {
     this._user = value;
   }
 }

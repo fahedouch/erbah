@@ -37,7 +37,6 @@ public class Tournement implements Serializable {
 	private List<User> users;
 
 	//bi-directional many-to-one association to UserTournement
-    @JsonIgnore
 	@OneToMany(mappedBy="tournement")
 	private List<UserTournement> userTournements;
 
