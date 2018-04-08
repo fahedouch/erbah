@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-$blue-ocf: rgb(17, 42, 86);
+$blue-ocf: rgb(17, 34, 68);
 $box-shadow: rgb(36, 36, 36);
 $grey:#a19f9f;
 $black:#000000;
@@ -19,7 +19,28 @@ $active-grey:#F2F4F6;
   padding: 16px;
 }
 
+//------------ dialog CSS ----------------------
 
+.mat-dialog-container{
+  width: 750px;
+}
+.mat-dialog-container button {
+  color: $blue-ocf;
+}
+
+.mat-dialog-container  mat-toolbar{
+  color: $active-grey;
+  background-color: $blue-ocf;
+}
+
+
+//------------rules tab CSS --------------------
+.rule-container mat-icon{
+  padding: 10px;
+}
+.rule-container mat-card{
+  display: inline-block;
+}
 
 //----------- Classement tab CSS ---------------
 

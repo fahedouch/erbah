@@ -1,0 +1,85 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>{{ data.name | translate }}</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content>
+<div *ngIf="data.name == 'generalIntroduction'">
+  <p>
+  Chers Gameurs,chères Gameuses. Bienvenue dans votre
+  espace « ERBA7 » qui va vous permettre par la même
+  occasion de jouer et de gagner de l’argent.
+
+  Notre site va donner une autre dimension pour le jeu
+  « Pro Evolution soccer 18 ».
+
+
+  Jouer et gagner de l’argent uniquement et en exclusivité
+  chez nous
+
+
+  Vous allez jouer votre « Pro 18 » avec une autre vision
+  </p>
+</div>
+
+
+<div *ngIf="data.name == 'generalRules'">
+  <p>
+    * Tout participant doit respecter le règlement général de
+    notre espace .
+
+    * Vous pouvez faire l’inscription comme suit:
+
+    * Le participant doit posséder un compte : Facebook ou Email ou
+    Gmail.
+
+    * En ajoutant : Photo et N° C.I.N
+
+    * Afin de s’inscrire l’administrateur doit vérifier et accepter
+    l’inscription.
+  </p>
+</div>
+
+
+<div *ngIf="data.name == 'tournamentSystem'">
+  <p>
+  Chers Gameurs,chères Gameuses. Bienvenue dans votre
+  espace « ERBA7 » qui va vous permettre par la même
+  occasion de jouer et de gagner de l’argent.
+
+
+  Notre site va donner une autre dimension pour le jeu
+  « Pro Evolution soccer 18 ».
+
+
+  Jouer et gagner de l’argent uniquement et en exclusivité
+  chez nous
+
+
+  Vous allez jouer votre « Pro 18 » avec une autre vision
+  </p>
+</div>
+
+
+<div *ngIf="data.name == 'generalIntroduction'">
+  <p>
+  Chers Gameurs,chères Gameuses. Bienvenue dans votre
+  espace « ERBA7 » qui va vous permettre par la même
+  occasion de jouer et de gagner de l’argent.
+
+
+  Notre site va donner une autre dimension pour le jeu
+  « Pro Evolution soccer 18 ».
+
+
+  Jouer et gagner de l’argent uniquement et en exclusivité
+  chez nous
+
+
+  Vous allez jouer votre « Pro 18 » avec une autre vision
+  </p>
+</div>
+  </mat-dialog-content>
+
+<button mat-button mat-dialog-close>close</button>

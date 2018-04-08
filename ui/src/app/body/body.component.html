@@ -1,5 +1,4 @@
-<mat-card>
-  <mat-card-content>
+
     <h2></h2>
     <mat-tab-group class="body-tab-group">
       <mat-tab [label]="'home' | translate" >
@@ -18,14 +17,16 @@
         </div>
       </mat-tab>
       <mat-tab [label]="'rules' | translate">
-        No content
+        <div class="body-tab-content">
+        <app-rules></app-rules>
+        </div>
       </mat-tab>
       <mat-tab [label]="'Erbah' | translate">
         No content
       </mat-tab>
     </mat-tab-group>
-  </mat-card-content>
-</mat-card>
+
+
 
 
 
