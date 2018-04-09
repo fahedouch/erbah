@@ -1,7 +1,7 @@
 {
   "home": "acceuil",
   "raking" : "classement",
-  "rules" : "guide",
+  "rules" : "réglement",
   "match" : "match",
   "Erbah": "Erbah",
   "copyright" : "©Copyright 2001-2017  - Tous droits réservés CGV",
@@ -16,5 +16,13 @@
   "tournaments" : "tournois",
   "Player1" : "Joueur 1",
   "Player2" : "Joueur 2",
-  "Result"  : "Resultat"
+  "Result"  : "Resultat",
+  "generalIntroduction" : "Introduction générale",
+  "generalRules" : "Reglement générale",
+  "tournamentSystem" : "Système du tournois",
+  "matchSettings" : "Configuration des matchs",
+  "matchConfiguration" : "réglages du match",
+  "playOffSystem" : "système play OFF",
+  "badComportement" : "les mauvais comportement"
+
 }

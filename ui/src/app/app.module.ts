@@ -23,7 +23,9 @@ import { MatButtonModule,
   MatSelectModule,
   MatTabsModule,
   MatTooltipModule,
-  MatToolbarModule } from '@angular/material';
+  MatToolbarModule,
+  MatCardModule} from '@angular/material';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -33,6 +35,8 @@ import {MatPaginatorIntl } from "@angular/material";
 import { MatchComponent } from './body/match/match.component';
 import {DataService} from './services/data.service';
 import "reflect-metadata";
+import { RulesComponent } from './rules/rules.component';
+import { RulesDialogComponent } from './rules/rules-dialog/rules-dialog.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -46,7 +50,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     HeaderComponent,
     BodyComponent,
     FooterComponent,
-    MatchComponent
+    MatchComponent,
+    RulesComponent,
+    RulesDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +77,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     HttpClientModule,
     MatPaginatorModule,
+    MatCardModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -80,6 +87,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
 
   ],
+  entryComponents: [RulesDialogComponent],
   providers: [{ provide: MatPaginatorIntl, useClass: RakingComponent},DataService],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
