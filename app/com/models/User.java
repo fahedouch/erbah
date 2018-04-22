@@ -29,41 +29,18 @@ public class User implements Serializable {
 	@Column(name="user_password")
 	private String userPassword;
 
-	//bi-directional many-to-many association to Footmatch
-	@JsonIgnore
-	@ManyToMany
-	@JoinTable(
-		name="user_footmatch"
-		, joinColumns={
-			@JoinColumn(name="user_id" , referencedColumnName = "user_id")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="match_id", referencedColumnName="match_id")
-			}
-		)
-	private List<Footmatch> footmatches;
-
-	//bi-directional many-to-many association to Tournement
-    @JsonIgnore
-	@ManyToMany
-	@JoinTable(
-		name="user_tournement"
-		, joinColumns={
-			@JoinColumn(name="user_id" , referencedColumnName ="user_id" )
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="tournement_id" , referencedColumnName="tournement_id")
-			}
-		)
-	private List<Tournement> tournements;
+	//bi-directional many-to-one association to Club
+	@ManyToOne
+	@JoinColumn(name="club_id")
+	private Club club;
 
 	//bi-directional many-to-one association to UserFootmatch
-    @JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<UserFootmatch> userFootmatches;
 
 	//bi-directional many-to-one association to UserTournement
-    @JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<UserTournement> userTournements;
 
@@ -102,20 +79,12 @@ public class User implements Serializable {
 		this.userPassword = userPassword;
 	}
 
-	public List<Footmatch> getFootmatches() {
-		return this.footmatches;
+	public Club getClub() {
+		return this.club;
 	}
 
-	public void setFootmatches(List<Footmatch> footmatches) {
-		this.footmatches = footmatches;
-	}
-
-	public List<Tournement> getTournements() {
-		return this.tournements;
-	}
-
-	public void setTournements(List<Tournement> tournements) {
-		this.tournements = tournements;
+	public void setClub(Club club) {
+		this.club = club;
 	}
 
 	public List<UserFootmatch> getUserFootmatches() {

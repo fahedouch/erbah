@@ -1,7 +1,5 @@
 package com.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
@@ -30,10 +28,6 @@ public class Footmatch implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="tournement_id")
 	private Tournement tournement;
-
-	//bi-directional many-to-many association to User
-	@ManyToMany(mappedBy="footmatches")
-	private List<User> users;
 
 	//bi-directional many-to-one association to UserFootmatch
 	@OneToMany(mappedBy="footmatch")
@@ -72,14 +66,6 @@ public class Footmatch implements Serializable {
 
 	public void setTournement(Tournement tournement) {
 		this.tournement = tournement;
-	}
-
-	public List<User> getUsers() {
-		return this.users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
 	}
 
 	public List<UserFootmatch> getUserFootmatches() {

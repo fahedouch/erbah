@@ -27,14 +27,14 @@ public class Tournement implements Serializable {
 	private String tournementDateStart;
 
 	//bi-directional many-to-one association to Footmatch
-    @JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="tournement")
 	private List<Footmatch> footmatches;
 
-	//bi-directional many-to-many association to User
-    @JsonIgnore
-	@ManyToMany(mappedBy="tournements")
-	private List<User> users;
+	//bi-directional many-to-one association to Club
+	@ManyToOne
+	@JoinColumn(name="club_id")
+	private Club club;
 
 	//bi-directional many-to-one association to UserTournement
 	@OneToMany(mappedBy="tournement")
@@ -89,12 +89,12 @@ public class Tournement implements Serializable {
 		return footmatch;
 	}
 
-	public List<User> getUsers() {
-		return this.users;
+	public Club getClub() {
+		return this.club;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setClub(Club club) {
+		this.club = club;
 	}
 
 	public List<UserTournement> getUserTournements() {
