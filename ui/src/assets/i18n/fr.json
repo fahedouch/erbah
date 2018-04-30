@@ -23,6 +23,9 @@
   "matchSettings" : "Configuration des matchs",
   "matchConfiguration" : "réglages du match",
   "playOffSystem" : "système play OFF",
-  "badComportement" : "les mauvais comportement"
+  "badComportement" : "les mauvais comportement",
+  "joinChat" : "rejoint à la conversation.",
+  "isNow" : "est maintenant",
+  "TypeMessage" : "Tapez votre message"
 
 }

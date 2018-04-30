@@ -37,6 +37,7 @@ import {DataService} from './services/data.service';
 import "reflect-metadata";
 import { RulesComponent } from './rules/rules.component';
 import { RulesDialogComponent } from './rules/rules-dialog/rules-dialog.component';
+import { ChatModule } from './chat/chat.module';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -45,6 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
+
     AppComponent,
     RakingComponent,
     HeaderComponent,
@@ -84,7 +86,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    ChatModule
 
   ],
   entryComponents: [RulesDialogComponent],
