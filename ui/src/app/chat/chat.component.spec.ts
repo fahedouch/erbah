@@ -1,22 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
-import { RulesComponent } from './rules.component';
+import { ChatComponent } from './chat.component';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpLoaderFactory} from "../app.module";
-import {MatDialogModule} from "@angular/material";
-import {MaterialModule} from "../material.module";
-import {FormsModule} from "@angular/forms";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import {SocketService} from "./shared/services/socket.service";
+import {MatDialog, MatDialogModule} from "@angular/material";
+import {MaterialModule} from "../material.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
-describe('RulesComponent', () => {
-  let component: RulesComponent;
-  let fixture: ComponentFixture<RulesComponent>;
+describe('ChatComponent', () => {
+  let component: ChatComponent;
+  let fixture: ComponentFixture<ChatComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RulesComponent ],
+      declarations: [ ChatComponent ],
+      providers: [SocketService,MatDialog],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports :[BrowserAnimationsModule,HttpClientModule,MatDialogModule,MaterialModule,FormsModule,TranslateModule.forRoot({
         loader: {
@@ -30,7 +32,7 @@ describe('RulesComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RulesComponent);
+    fixture = TestBed.createComponent(ChatComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
