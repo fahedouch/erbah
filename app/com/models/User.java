@@ -29,6 +29,9 @@ public class User implements Serializable {
 	@Column(name="user_password")
 	private String userPassword;
 
+	@Column(name="user_pseudo")
+	private String userPseudo;
+
 	//bi-directional many-to-one association to Club
 	@ManyToOne
 	@JoinColumn(name="club_id")
@@ -77,6 +80,14 @@ public class User implements Serializable {
 
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+
+	public String getUserPseudo() {
+		return this.userPseudo;
+	}
+
+	public void setUserPseudo(String userPseudo) {
+		this.userPseudo = userPseudo;
 	}
 
 	public Club getClub() {

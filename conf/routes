@@ -9,3 +9,5 @@ GET     /api/UserTournamentsTournament/:id                        com.controller
 GET     /api/MatchTournament/:id                        com.controllers.MatchController.getMatchByTournamentId(id :Integer)
 
 GET     /api/Tournament                              com.controllers.RankingController.getTournament()
+
+POST    /api/authenticate                            com.controllers.RankingController.getTournament()

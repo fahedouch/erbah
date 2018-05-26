@@ -1,7 +1,8 @@
-import { Column, Entity, OneToMany } from 'entitype';
+import {Column, Entity, ManyToOne, OneToMany} from 'entitype';
 
 import { Footmatch } from './footmatch';
 import { UserTournement } from './user-tournement';
+import {Club} from "./club";
 
 @Entity('tournement')
 export class Tournement {
@@ -15,8 +16,14 @@ export class Tournement {
   @Column({ columnName: `tournement_date_end`, type: `varchar(45)`, default: null })
   _tournementDateEnd?: string;
 
+  @Column({ columnName: `club_id`, type: `int(11)`, nullable: false, default: null, index: true })
+  clubId: number;
+
   @OneToMany(type => Footmatch, x => x.tournementId)
   _footmatches: Footmatch[];
+
+  @ManyToOne(type => Tournement, x => x.clubId)
+  club: Club;
 
   @OneToMany(type => UserTournement, x => x.tournementId)
   _userTournements: UserTournement[];

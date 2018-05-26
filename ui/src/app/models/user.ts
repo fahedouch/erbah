@@ -1,7 +1,8 @@
-import { Column, Entity, OneToMany } from 'entitype';
+import {Column, Entity, ManyToOne, OneToMany} from 'entitype';
 
 import { UserFootmatch } from './user-footmatch';
 import { UserTournement } from './user-tournement';
+import {Club} from "./club";
 
 @Entity('user')
 export class User {
@@ -18,12 +19,45 @@ export class User {
   @Column({ columnName: `user_password`, type: `varchar(45)`, default: null })
   _userPassword?: string;
 
+  @Column({ columnName: `club_id`, type: `int(11)`, nullable: false, default: null, index: true })
+  _clubId: number;
+
+  @Column({ columnName: `user_pseudo`, type: `varchar(255)`, default: null })
+  _userPseudo?: string;
+
+  @ManyToOne(type => User, x => x._clubId)
+  _club: Club;
+
   @OneToMany(type => UserFootmatch, x => x.userId)
   _userFootmatches: UserFootmatch[];
 
   @OneToMany(type => UserTournement, x => x.userId)
   _userTournements: UserTournement[];
 
+
+  public get clubId(): number {
+    return this._clubId;
+  }
+
+  public set clubId(value: number) {
+    this._clubId = value;
+  }
+
+  public get userPseudo(): string {
+    return this._userPseudo;
+  }
+
+  public set userPseudo(value: string) {
+    this._userPseudo = value;
+  }
+
+  public get club(): Club {
+    return this._club;
+  }
+
+  public set club(value: Club) {
+    this._club = value;
+  }
 
   public get userId(): number {
     return this._userId;

@@ -9,6 +9,7 @@ $black:#000000;
 $active-grey:#F2F4F6;
 
 
+
 // ---------Body CSS ------------
 
 .body-tab-group {
@@ -18,6 +19,12 @@ $active-grey:#F2F4F6;
 .body-tab-content {
   padding: 16px;
 }
+// ----------- login  dialog CSS ----------------
+
+.userLogin .mat-dialog-container{
+  background-color: rgba(255,255,255,.4);
+}
+
 
 //------------ dialog CSS ----------------------
 
@@ -119,6 +126,7 @@ $active-grey:#F2F4F6;
   font-size: 26px;
 }
 
+//-------------------
 
 //------------------- HEADER CSS ----------------
 

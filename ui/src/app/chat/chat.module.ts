@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChatComponent } from './chat.component';
 import { SocketService } from './shared/services/socket.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import { DialogUserComponent } from './dialog-user/dialog-user.component';
 import {
   MatButtonModule,
   MatCardModule,
@@ -62,9 +61,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatToolbarModule,
     ChatComponent
   ],
-  declarations: [ChatComponent,DialogUserComponent],
+  declarations: [ChatComponent],
   providers: [SocketService,MatDialog],
-  entryComponents: [DialogUserComponent]
+  schemas : [CUSTOM_ELEMENTS_SCHEMA]
 
 })
 export class ChatModule { }

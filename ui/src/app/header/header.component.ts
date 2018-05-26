@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import {DialogUserComponent} from "../dialog-user/dialog-user.component";
+import {MatDialog, MatDialogRef} from "@angular/material";
 
 
 @Component({
@@ -29,8 +31,10 @@ export class HeaderComponent implements OnInit {
   userMenuList: any;
   menuState: string;
   showUser;
+  dialogRef: MatDialogRef<DialogUserComponent> | null;
 
-  constructor() { }
+
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
     this.imgLogo = "logo.png";
@@ -50,6 +54,30 @@ export class HeaderComponent implements OnInit {
       }
     ];
     this.showUser = true;
+  }
+
+
+
+  private openLoginPopup(): void {
+    this.dialogRef = this.dialog.open(DialogUserComponent,{
+      panelClass : ['userLogin'],
+      disableClose: false,
+    });
+    this.dialogRef.afterClosed().subscribe(paramsDialog => {
+
+      //authentification process
+      /*if (!paramsDialog) {
+        return;
+      }
+
+      this.user.name = paramsDialog.username;
+      if (paramsDialog.dialogType === DialogUserType.NEW) {
+        this.initIoConnection();
+        this.sendNotification(paramsDialog, Action.JOINED);
+      } else if (paramsDialog.dialogType === DialogUserType.EDIT) {
+        this.sendNotification(paramsDialog, Action.RENAME);
+      }*/
+    });
   }
 
 }

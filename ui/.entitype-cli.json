@@ -1,14 +1,14 @@
 {
       "$schema": "https://raw.githubusercontent.com/entitype/entitype/master/packages/entitype-cli/schema.json",
         "pull": {
-                "output": "src/app/models",
+                "output": "modelsGenrate",
                     "index": true,
                         "interactive": true,
                             "connection": {
                                       "$schema": "https://raw.githubusercontent.com/entitype/entitype/master/packages/entitype-mysql/schema.json",
                                             "adapter": "mysql",
                                                   "database": "erbah",
-                                                        "host": "10.18.0.3",
+                                                        "host": "10.18.0.2",
                                                               "port": 3306,
                                                                     "password": "",
                                                                           "user": "root"

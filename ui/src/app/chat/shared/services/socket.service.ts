@@ -14,6 +14,7 @@ export class SocketService {
 
   public initSocket(): void {
     this.socket = socketIo(SERVER_URL);
+
   }
 
   public send(message: Message): void {
