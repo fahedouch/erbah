@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule ,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { RakingComponent } from './body/raking/raking.component';
@@ -38,6 +39,8 @@ import "reflect-metadata";
 import { RulesComponent } from './rules/rules.component';
 import { RulesDialogComponent } from './rules/rules-dialog/rules-dialog.component';
 import { ChatModule } from './chat/chat.module';
+import {DialogUserComponent} from "./dialog-user/dialog-user.component";
+import {AuthenticationService} from "./services/authentication.service";
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -54,7 +57,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     FooterComponent,
     MatchComponent,
     RulesComponent,
-    RulesDialogComponent
+    RulesDialogComponent,
+    DialogUserComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +81,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTableModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatPaginatorModule,
     MatCardModule,
@@ -90,8 +96,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ChatModule
 
   ],
-  entryComponents: [RulesDialogComponent],
-  providers: [{ provide: MatPaginatorIntl, useClass: RakingComponent},DataService],
+  entryComponents: [RulesDialogComponent,DialogUserComponent],
+  providers: [{ provide: MatPaginatorIntl, useClass: RakingComponent},DataService,AuthenticationService],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

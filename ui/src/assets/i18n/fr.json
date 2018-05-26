@@ -26,6 +26,12 @@
   "badComportement" : "les mauvais comportement",
   "joinChat" : "rejoint à la conversation.",
   "isNow" : "est maintenant",
-  "TypeMessage" : "Tapez votre message"
+  "TypeMessage" : "Tapez votre message",
+  "PseudoFliedError" : "Pseudo est requis (min 5 caractères).",
+  "NameFliedError" : "Nom est requis (min 5 caractères).",
+  "PasswordFliedError" : "Mot de passe est requis (min 5 caractères).",
+  "EmailFliedError" : "Un e-mail est requis et le format doit être john@doe.com",
+  "ConfirmPasswordFliedError" :"Le mot de passe ne correspond pas."
+
 
 }

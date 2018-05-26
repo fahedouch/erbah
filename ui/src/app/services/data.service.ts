@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -6,12 +6,20 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 @Injectable()
 export class DataService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  options(): any {
-    var headers = new HttpHeaders();
-    headers = headers.append('Content-Type', 'application/json');
+  options(headerMap?: Map<string, string>): any {
 
+
+      var headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+
+    if (headerMap) {
+      for (let [ key, value ] of Array.from(headerMap.entries())) {
+        headers.append(key, value);
+      }
+    }
     return {headers: headers};
   }
 
@@ -35,11 +43,13 @@ export class DataService {
    *
    * @return : an Observable instance which is performing the request.
    */
-  get(url: string, params?: any): Observable<any> {
+  get(url: string, params?: any, headerMap?: Map<string, string>): Observable<any> {
+
     if (params) {
       url += '?' + params;
     }
-    return this.http.get<any>(url, this.options());
+    return this.http.get<any>(url, this.options(headerMap));
   }
+
 
 }

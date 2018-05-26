@@ -6,8 +6,7 @@ import { Event } from './shared/model/event';
 import { Message } from './shared/model/message';
 import { User } from './shared/model/user';
 import { SocketService } from './shared/services/socket.service';
-import { DialogUserComponent } from './dialog-user/dialog-user.component';
-import { DialogUserType } from './dialog-user/dialog-user-type';
+import { DialogUserComponent } from '../dialog-user/dialog-user.component';
 import {TranslateService} from '@ngx-translate/core';
 
 
@@ -25,13 +24,13 @@ export class ChatComponent implements OnInit, AfterViewInit {
   messageContent: string;
   ioConnection: any;
   dialogRef: MatDialogRef<DialogUserComponent> | null;
-  defaultDialogUserParams: any = {
+/*  defaultDialogUserParams: any = {
     disableClose: true,
     data: {
       title: 'Welcome',
       dialogType: DialogUserType.NEW
     }
-  };
+  };*/
 
   // getting a reference to the overall list, which is the parent container of the list items
   @ViewChild(MatList, { read: ElementRef }) matList: ElementRef;
@@ -50,9 +49,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.initModel();
     // Using timeout due to https://github.com/angular/angular/issues/14748
-    setTimeout(() => {
+    /*setTimeout(() => {
       this.openUserPopup(this.defaultDialogUserParams);
-    }, 0);
+    }, 0);*/
   }
 
   ngAfterViewInit(): void {
@@ -102,7 +101,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   private getRandomId(): number {
     return Math.floor(Math.random() * (1000000)) + 1;
   }
-
+/*
   public onClickUserInfo() {
     this.openUserPopup({
       data: {
@@ -128,7 +127,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.sendNotification(paramsDialog, Action.RENAME);
       }
     });
-  }
+  }*/
 
   public sendMessage(message: string): void {
     if (!message) {

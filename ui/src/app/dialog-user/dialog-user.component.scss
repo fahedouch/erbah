@@ -1,11 +1,11 @@
 // colors
-$color-body: #1abc9c;
-$color-accent: #16a085;
+$color-body: #f6a064;
+$color-accent: rgb(17, 34, 68);
 $color-input: #fff;
 
 
 //    fix position radio input off-canvas
-      input[type="radio"] {
+input[type="radio"] {
         position: fixed;
         left: -100px;
       }
@@ -42,9 +42,9 @@ input:not([type="radio"]) {
 
 //    submit button
       button {
-        width: 250px;
-        height: 40px;
+        margin-top: 20px;
         border-radius: 7px;
+        color : $color-input;
         background-color: $color-accent;
         font-size: 0;
 &:before { font-size: 16px; }
@@ -92,15 +92,19 @@ label {
 //    flex does not work well on fiedset
 //    why we use a styling wrapper
       .flex-wrapp {
-        display: flex;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
-        height: 300px;
         text-align: center;
       }
 
+
 body {
-  background-color: $color-body;
+  background-color: #fff0;
   font-size: 16px;
 }
+
+small{
+  color : rgb(206, 17, 26);
+}
+
