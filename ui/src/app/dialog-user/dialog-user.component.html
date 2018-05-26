@@ -1,0 +1,40 @@
+<mat-dialog-content>
+
+<div class="flex-wrapp">
+    <form action novalidate *ngIf="rForm" [formGroup]="rForm" (ngSubmit)="login(rForm.value)" >
+
+      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+
+      <input type="radio" name="rg" (change)="handleClick('sign-in');" value="sign-in" id="sign-in" checked/>
+
+      <input type="radio" name="rg" (change)="handleClick('sign-up');" value="sign-up"  id="sign-up" />
+
+      <input type="radio" name="rg" (change)="handleClick('reset');" value="reset" id="reset" />
+
+      <label for="sign-in">Sign in</label>
+      <label for="sign-up">Sign up</label>
+      <label for="reset">Reset</label>
+
+      <input  class="sign-up sign-in" type="pseudo" placeholder="Pseudo" formControlName="pseudo"  >
+      <small  [hidden]=" !(entryMode.getValue() == 'sign-up' || entryMode.getValue() == 'sign-in') || (rForm.get(['pseudo']).valid ) "  > {{ 'PseudoFliedError' | translate }}
+      </small>
+
+      <input  class="sign-up" type="name" placeholder="Name" formControlName="name"   />
+      <small [hidden]=" !(entryMode.getValue() == 'sign-up') || rForm.get(['name']).valid "  >{{ 'NameFliedError' | translate }} </small>
+
+
+        <input  class="sign-up  reset" type="email" placeholder="Email" formControlName="email" />
+      <small [hidden]=" !(entryMode.getValue() == 'sign-up' || entryMode.getValue() == 'reset') || (rForm.get(['email']).valid) "  >{{ 'EmailFliedError' | translate }}</small>
+
+
+        <input  class="sign-up sign-in" type="password" placeholder ="Password" formControlName="password" />
+        <small [hidden]="!(entryMode.getValue() == 'sign-up' || entryMode.getValue() == 'sign-in') || (rForm.get(['password']).valid)"  >{{ 'PasswordFliedError' | translate }}</small>
+
+        <input  class="sign-up" type="password" placeholder ="Repeat Password" formControlName="confirmPassword" />
+      <small [hidden]="!(entryMode.getValue() == 'sign-up') || (rForm.get(['confirmPassword']).valid )"  >{{ 'ConfirmPasswordFliedError' | translate }}</small>
+
+      <input [hidden]=true  />
+      <button    type="submit" mat-raised-button [disabled]="!rForm.valid" >Submit</button>
+    </form>
+</div>
+</mat-dialog-content>

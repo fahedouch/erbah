@@ -1,0 +1,72 @@
+<mat-select   [placeholder]="'tournaments' | translate" >
+    <mat-option *ngFor="let tournament of tournaments" (click)="loadUserTournamentsTournamentById(tournament.tournementId)"   [value]="tournament.tournementId">
+      {{ tournament.tournementDateStart }} - {{ tournament.tournementDateEnd }}
+    </mat-option>
+  </mat-select>
+<div class="filter-header">
+  <mat-form-field>
+    <input  (keyup)="applyFilter($event.target.value)" matInput [placeholder]="'filter' | translate">
+  </mat-form-field>
+</div>
+
+<div class="ranking-container mat-elevation-z8">
+
+  <mat-table #table [dataSource]="dataSource">
+    <!-- Position Column -->
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef> {{ 'raking' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.userName}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="userPoint">
+      <mat-header-cell *matHeaderCellDef> P </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.userPoint}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="userVictory">
+      <mat-header-cell *matHeaderCellDef> V </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.userVictory}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userNull">
+      <mat-header-cell *matHeaderCellDef> N </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.userNull}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="user_defeat">
+      <mat-header-cell *matHeaderCellDef> D </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.userDefeat}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="userAcceptedGoal">
+      <mat-header-cell *matHeaderCellDef> BP </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.userAcceptedGoal}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userGoalScored">
+      <mat-header-cell *matHeaderCellDef> BC </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.userGoalScored}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userDifference">
+      <mat-header-cell *matHeaderCellDef> DF </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.userDifference}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userGoalByMatch">
+      <mat-header-cell *matHeaderCellDef> P% </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.userGoalByMatch}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="5"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>

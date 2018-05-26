@@ -1,0 +1,13 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+
+GET     /api/UserTournamentsTournament/:id                        com.controllers.RankingController.getUserTournamentsTournamentById(id :Integer)
+
+GET     /api/MatchTournament/:id                        com.controllers.MatchController.getMatchByTournamentId(id :Integer)
+
+GET     /api/Tournament                              com.controllers.RankingController.getTournament()
+
+POST    /api/authenticate                            com.controllers.RankingController.getTournament()

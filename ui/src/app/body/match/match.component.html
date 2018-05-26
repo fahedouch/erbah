@@ -1,0 +1,45 @@
+  <mat-select  [placeholder]="'tournaments' | translate"  >
+    <mat-option *ngFor="let tournament of tournaments" (click)="loadMatchsTournamentById(tournament.tournementId)"   [value]="tournament.tournementId">
+      {{ tournament.tournementDateStart }} - {{ tournament.tournementDateEnd }}
+    </mat-option>
+  </mat-select>
+
+<div class="filter-header">
+  <mat-form-field>
+    <input  (keyup)="applyFilter($event.target.value)" matInput [placeholder]="'filter' | translate">
+  </mat-form-field>
+</div>
+
+<div class="match-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="Player1">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element"> <mat-icon>face</mat-icon>  {{element.Player1}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Result">
+      <mat-header-cell *matHeaderCellDef> {{ 'Result' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"><span class="result-score">{{element.Player1Goal}}</span><span class="result-point">:</span><span class="result-score">{{element.Player2Goal}}</span> </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Player2">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element"> <mat-icon disabled>face</mat-icon> {{element.Player2}} </mat-cell>
+    </ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="5"
+                 [pageSizeOptions]="[6, 10, 20]"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>
