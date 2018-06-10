@@ -10,4 +10,6 @@ GET     /api/MatchTournament/:id                        com.controllers.MatchCon
 
 GET     /api/Tournament                              com.controllers.RankingController.getTournament()
 
-POST    /api/authenticate                            com.controllers.RankingController.getTournament()
+POST    /api/authenticate                            com.controllers.authentificationContoller.login()
+
+GET      /api/CSRFToken/                             com.controllers.authentificationContoller.getCsrfToken()

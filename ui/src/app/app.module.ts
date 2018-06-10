@@ -41,6 +41,7 @@ import { RulesDialogComponent } from './rules/rules-dialog/rules-dialog.componen
 import { ChatModule } from './chat/chat.module';
 import {DialogUserComponent} from "./dialog-user/dialog-user.component";
 import {AuthenticationService} from "./services/authentication.service";
+import { MemoryService } from './services';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -97,7 +98,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
   ],
   entryComponents: [RulesDialogComponent,DialogUserComponent],
-  providers: [{ provide: MatPaginatorIntl, useClass: RakingComponent},DataService,AuthenticationService],
+  providers: [{ provide: MatPaginatorIntl, useClass: RakingComponent},DataService,AuthenticationService, MemoryService],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

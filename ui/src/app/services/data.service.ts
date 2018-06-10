@@ -9,6 +9,11 @@ export class DataService {
   constructor(private http: HttpClient) {
   }
 
+  /**
+   * request option
+   * @param {Map<string, string>} headerMap
+   * @returns {any}
+   */
   options(headerMap?: Map<string, string>): any {
 
 
@@ -20,7 +25,18 @@ export class DataService {
         headers.append(key, value);
       }
     }
-    return {headers: headers};
+    return headers;
+  }
+
+  /**
+   * get header token
+   * @param token
+   * @returns {any}
+   */
+  getHeaderToken(token): any {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json').append('X-CSRF-TOKEN', token );
+    return headers;
   }
 
   /**
@@ -31,9 +47,14 @@ export class DataService {
    *
    * @return : an Observable instance which is performing the request.
    */
-  post(url, body) {
-    return this.http.post(url, body, this.options());
+  post(url, body, CSRFtoken, responseType?): Observable<any> {
+    var option : any = {
+      responseType: (responseType != null) ? responseType : 'json',
+      headers:  this.getHeaderToken(CSRFtoken)
+    };
+    return this.http.post(url, body, option);
   }
+
 
   /**
    * Send a simple GET query to the back.
@@ -43,13 +64,36 @@ export class DataService {
    *
    * @return : an Observable instance which is performing the request.
    */
-  get(url: string, params?: any, headerMap?: Map<string, string>): Observable<any> {
+  get(url: string, params?: any, headerMap?: Map<string, string>,responseType?): Observable<any> {
 
     if (params) {
       url += '?' + params;
     }
-    return this.http.get<any>(url, this.options(headerMap));
+    var option : any = {
+      responseType: (responseType != null) ? responseType : 'json' ,
+      headers:  this.options(headerMap)
+    };
+
+    return this.http.get(url, option);
   }
 
+  /**
+   * Get JWT token
+   * @param {string} url
+   * @returns {Observable<string>}
+   */
+  getJWTToken(url: string) {
+    var headerMap = new Map<string, string>();
+    return this.get(url,null, headerMap );
+  }
+
+  /**
+   * Get CSRF token
+   * @param {string} url
+   * @returns {Observable<any>}
+   */
+  getCSRFToken(url: string){
+    return this.get(url,null,null,'text');
+  }
 
 }

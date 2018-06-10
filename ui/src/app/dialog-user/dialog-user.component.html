@@ -3,7 +3,6 @@
 <div class="flex-wrapp">
     <form action novalidate *ngIf="rForm" [formGroup]="rForm" (ngSubmit)="login(rForm.value)" >
 
-      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
 
       <input type="radio" name="rg" (change)="handleClick('sign-in');" value="sign-in" id="sign-in" checked/>
 
@@ -35,6 +34,8 @@
 
       <input [hidden]=true  />
       <button    type="submit" mat-raised-button [disabled]="!rForm.valid" >Submit</button>
+
+      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
     </form>
 </div>
 </mat-dialog-content>
