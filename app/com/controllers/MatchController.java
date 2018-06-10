@@ -31,4 +31,7 @@ public class MatchController extends  Controller{
 
         return ok(Json.toJson((matchService.getTournament())).toString());
     }
+
+
+
 }
