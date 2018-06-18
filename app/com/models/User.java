@@ -2,6 +2,7 @@ package com.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
@@ -16,9 +17,8 @@ import java.util.List;
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name="user_id")
-	private int userId;
+	@EmbeddedId
+	private UserPK id;
 
 	@Column(name="user_email")
 	private String userEmail;
@@ -29,8 +29,6 @@ public class User implements Serializable {
 	@Column(name="user_password")
 	private String userPassword;
 
-	@Column(name="user_pseudo")
-	private String userPseudo;
 
 	//bi-directional many-to-one association to Club
 	@ManyToOne
@@ -50,12 +48,12 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public int getUserId() {
-		return this.userId;
+	public UserPK getId() {
+		return this.id;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setId(UserPK id) {
+		this.id = id;
 	}
 
 	public String getUserEmail() {
@@ -82,14 +80,6 @@ public class User implements Serializable {
 		this.userPassword = userPassword;
 	}
 
-	public String getUserPseudo() {
-		return this.userPseudo;
-	}
-
-	public void setUserPseudo(String userPseudo) {
-		this.userPseudo = userPseudo;
-	}
-
 	public Club getClub() {
 		return this.club;
 	}
@@ -106,6 +96,7 @@ public class User implements Serializable {
 		this.userFootmatches = userFootmatches;
 	}
 
+	
 	public UserFootmatch addUserFootmatch(UserFootmatch userFootmatch) {
 		getUserFootmatches().add(userFootmatch);
 		userFootmatch.setUser(this);

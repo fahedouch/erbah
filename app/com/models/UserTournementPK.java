@@ -15,6 +15,9 @@ public class UserTournementPK implements Serializable {
 	@Column(name="user_id", insertable=false, updatable=false)
 	private int userId;
 
+	@Column(name="user_pseudo", insertable=false, updatable=false)
+	private String userPseudo;
+
 	@Column(name="tournement_id", insertable=false, updatable=false)
 	private int tournementId;
 
@@ -26,6 +29,12 @@ public class UserTournementPK implements Serializable {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+				public String getUserPseudo() {
+								return this.userPseudo;
+				}
+				public void setUserPseudo(String userPseudo) {
+								this.userPseudo = userPseudo;
+				}
 	public int getTournementId() {
 		return this.tournementId;
 	}

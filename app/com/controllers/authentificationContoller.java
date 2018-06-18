@@ -1,17 +1,20 @@
 package com.controllers;
 
 import javax.inject.Inject;
+
 import play.filters.csrf.CSRF;
 import play.mvc.Controller;
 import play.mvc.Result;
 import com.typesafe.config.Config;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+
 import java.io.UnsupportedEncodingException;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import play.libs.Json;
-
+import com.services.UserService;
 
 /**
  * @author DORGAA FAHED
@@ -22,6 +25,8 @@ public class authentificationContoller extends Controller {
 
     @Inject
     private Config config;
+
+    private UserService userService = new UserService();
 
     /**
      * Return the CSRF token required by the front.
@@ -58,8 +63,13 @@ public class authentificationContoller extends Controller {
             return ok(result.put("jwt_token", false));
         }
 
-        if (body.hasNonNull("username") && body.hasNonNull("password") && body.get("username").asText().equals("fahedouch")) {
-            result.put("jwt_token", getSignedToken(7l));
+        if (body.hasNonNull("pseudo") &&
+                body.hasNonNull("password") &&
+                (this.userService.findUserbyPseudo(body.get("pseudo").asText()) != null) &&
+                (this.userService.findUserbyPseudo(body.get("pseudo").asText()).getUserPassword().equals(body.get("password").asText()))) {
+
+
+            result.put("jwt_token", getSignedToken(new Long(this.userService.findUserbyPseudo(body.get("pseudo").asText()).getId().getUserId())));
             return ok(result);
         }
 

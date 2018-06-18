@@ -54,7 +54,10 @@ public class UserTournement implements Serializable {
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumns({
+									@JoinColumn(name="user_id", referencedColumnName="user_id"),
+									@JoinColumn(name="user_pseudo", referencedColumnName="user_pseudo")
+	})
 	private User user;
 
 	public UserTournement() {

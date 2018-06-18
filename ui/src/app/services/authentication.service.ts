@@ -33,7 +33,7 @@ export class AuthenticationService {
       this.CSRFtoken = res;
     });
 
-    return this.dataService.post('/api/authenticate', JSON.stringify({ username: pseudo, password: password }),
+    return this.dataService.post('/api/authenticate', JSON.stringify({ pseudo: pseudo, password: password }),
       this.CSRFtoken)
       .map((response ) => {
         this.tokenModel = response;
@@ -43,7 +43,7 @@ export class AuthenticationService {
           this.token = token;
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
-          sessionStorage.setItem('currentUser', JSON.stringify({ username: pseudo, token: token }));
+          sessionStorage.setItem('currentUser', JSON.stringify({ pseudo: pseudo, token: token }));
 
           // return true to indicate successful login
           return true;
