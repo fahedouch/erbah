@@ -15,6 +15,9 @@ public class UserFootmatchPK implements Serializable {
 	@Column(name="user_id", insertable=false, updatable=false)
 	private int userId;
 
+	@Column(name="user_pseudo", insertable=false, updatable=false)
+	private String userPseudo;
+
 	@Column(name="match_id", insertable=false, updatable=false)
 	private int matchId;
 
@@ -26,6 +29,12 @@ public class UserFootmatchPK implements Serializable {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+				public String getUserPseudo() {
+								return this.userPseudo;
+				}
+				public void setUserPseudo(String userPseudo) {
+								this.userPseudo = userPseudo;
+				}
 	public int getMatchId() {
 		return this.matchId;
 	}
