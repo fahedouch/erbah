@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA} from '@angular/material';
 import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {AuthenticationService} from '../services/index';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'tcc-dialog-user',
@@ -13,16 +14,18 @@ export class DialogUserComponent implements OnInit {
 
   rForm: FormGroup;
   entryMode = new BehaviorSubject<String>(null);
-  error: string;
+  error: boolean;
 
   constructor(@Inject(MAT_DIALOG_DATA) public params: any,
               public fb: FormBuilder,
+              private dialogRef: MatDialogRef<DialogUserComponent>,
               private authenticationService: AuthenticationService) {
     this.entryMode.next("sign-in");
   }
 
   private handleClick(value) {
     this.entryMode.next(value);
+    this.error = false;
   }
 
   static matchPassword(AC: AbstractControl) {
@@ -88,17 +91,23 @@ export class DialogUserComponent implements OnInit {
 
   }
 
+  /**
+   * login method
+   * @param post
+   */
   login(post) {
+    this.error = false;
     this.authenticationService.login(post.pseudo, post.password)
       .subscribe(result => {
-        if (result === true) {
-          console.log('login successful');
-        } else {
-          // login failed
-          this.error = 'Username or password is incorrect';
-          console.log(this.error);
-        }
-      });
+          if (result === true) {
+            this.dialogRef.close();
+          } else {
+            this.error = true;
+          }
+        },
+        (err) => {
+          console.log('here i shloud make a logging system')
+        });
   }
 
 }
