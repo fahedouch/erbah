@@ -33,9 +33,16 @@
       <small [hidden]="!(entryMode.getValue() == 'sign-up') || (rForm.get(['confirmPassword']).valid )"  >{{ 'ConfirmPasswordFliedError' | translate }}</small>
 
       <input [hidden]=true  />
+
+
+      <div *ngIf="error" class="alert alert-danger">{{ 'LoginFailedError' | translate }}</div>
+
+
+      <input [hidden]=true  />
+
       <button    type="submit" mat-raised-button [disabled]="!rForm.valid" >Submit</button>
 
-      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+
     </form>
 </div>
 </mat-dialog-content>

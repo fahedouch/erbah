@@ -31,7 +31,7 @@
   "NameFliedError" : "Nom est requis (min 5 caractères).",
   "PasswordFliedError" : "Mot de passe est requis (min 5 caractères).",
   "EmailFliedError" : "Un e-mail est requis et le format doit être john@doe.com",
-  "ConfirmPasswordFliedError" :"Le mot de passe ne correspond pas."
-
+  "ConfirmPasswordFliedError" :"Le mot de passe ne correspond pas.",
+  "LoginFailedError" : "L'identifiant ou le mot de passe est incorrect"
 
 }
