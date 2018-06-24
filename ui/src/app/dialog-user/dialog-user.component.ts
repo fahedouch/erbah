@@ -1,9 +1,9 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, Inject, Output, EventEmitter} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {AuthenticationService} from '../services/index';
-import { MatDialogRef } from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'tcc-dialog-user',
@@ -15,6 +15,8 @@ export class DialogUserComponent implements OnInit {
   rForm: FormGroup;
   entryMode = new BehaviorSubject<String>(null);
   error: boolean;
+  @Output() loginState = new EventEmitter();
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public params: any,
               public fb: FormBuilder,
@@ -101,8 +103,10 @@ export class DialogUserComponent implements OnInit {
       .subscribe(result => {
           if (result === true) {
             this.dialogRef.close();
+            this.loginState.emit(true);
           } else {
             this.error = true;
+            this.loginState.emit(false);
           }
         },
         (err) => {

@@ -7,6 +7,7 @@ $box-shadow: rgb(36, 36, 36);
 $grey:#a19f9f;
 $black:#000000;
 $active-grey:#F2F4F6;
+$button-color : #16c79a;
 
 
 
@@ -34,6 +35,7 @@ $active-grey:#F2F4F6;
 .mat-dialog-container button {
   color: $blue-ocf;
   float: right;
+  background-color: $button-color;
 }
 
 .mat-dialog-container  mat-toolbar{
@@ -131,7 +133,7 @@ $active-grey:#F2F4F6;
 //------------------- HEADER CSS ----------------
 
 .containerHead {
-  display: block;
+  display: flex;
   background-color: $blue-ocf;
 }
 
@@ -158,39 +160,37 @@ $active-grey:#F2F4F6;
 
 .separator {
   display: inline-block;
-  width: 6.7em;
+  width: 80.7em;
 }
 
-.containerSearch {
-  display: inline-block;
-}
-
-.mainSearchBar {
-  color: $grey;
-  width: 18em;
-}
 
 .containerUserProfil {
   width: auto;
   height: auto;
   font-size: 0.9em;
-  display: block;
+  display: inline-flex;
   margin-right: 100px;
-  margin-top: 0.0em;
-  margin-left: 50px;
+  margin-top: 2em;
+  margin-left: 56px;
 }
+
+.containerUserProfil .mat-fab.mat-accent {
+ // background-color: #33b793e3;
+  background-color: $button-color;
+}
+
 
 .containerUserProfil .mat-icon-button{
   width: auto;
   height: auto;
-  min-width: 70px ;
+  min-width: 70 px ;
 }
 .containerUserProfil .mat-icon {
   height: auto;
   width: auto;
 }
 .containerUserProfil .material-icons{
-  font-size: 14px;
+  font-size: 29px;
 }
 .containerUserProfil span {
   display: inline-block;
@@ -209,7 +209,7 @@ $active-grey:#F2F4F6;
   margin-right: 0.3em;
 }
 
-.userPicture {
+/*.userPicture {
   width: 4.375em;
   height: 4.375em;
   position: relative;
@@ -221,8 +221,27 @@ $active-grey:#F2F4F6;
   margin: 0 auto;
   height: 100%;
   width: auto;
+}*/
+
+.delimitor {
+  border-left: 1px solid $active-grey;
+  margin-right: 10px;
+  margin-left: 10px;
+  height: 90%;
 }
 
+.badge {
+  left: -10px;
+  background: red;
+  color: white;
+  width: 30px;
+  height: 30px;
+  font-weight: bolder;
+  font-size: 1.2em;
+  transition:0.5s linear all;
+  border-radius:50%;
+
+}
 
 //--------- Footer CSS ------------
 

@@ -9,8 +9,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpLoaderFactory} from "../app.module";
 import {MaterialModule} from "../material.module";
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
-import {AuthenticationService} from "../services/index";
-import {DataService} from "../services/index";
+import {AuthenticationService,MemoryService,DataService} from "../services/index";
 
 describe('DialogUserComponent', () => {
   let component: DialogUserComponent;
@@ -19,7 +18,7 @@ describe('DialogUserComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DialogUserComponent ],
-      providers: [DataService,AuthenticationService,SocketService,MatDialog,{provide: MatDialogRef, useValue: {username: "toto",
+      providers: [MemoryService,DataService,AuthenticationService,SocketService,MatDialog,{provide: MatDialogRef, useValue: {username: "toto",
           dialogType: "toto",
           previousUsername: "toto"}},
         {provide: MAT_DIALOG_DATA, useValue: {}}],
