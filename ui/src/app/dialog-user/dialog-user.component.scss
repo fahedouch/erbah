@@ -2,6 +2,7 @@
 $color-body: #f6a064;
 $color-accent: rgb(17, 34, 68);
 $color-input: #fff;
+$button-color : #16c79a;
 
 
 //    fix position radio input off-canvas
@@ -45,7 +46,7 @@ input:not([type="radio"]) {
         margin-top: 20px;
         border-radius: 7px;
         color : $color-input;
-        background-color: $color-accent;
+        background-color: $button-color;
         font-size: 0;
 &:before { font-size: 16px; }
 }

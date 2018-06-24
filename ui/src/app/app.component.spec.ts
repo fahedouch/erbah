@@ -5,6 +5,7 @@ import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpLoaderFactory} from "./app.module";
 import {HttpClient,HttpClientModule} from "@angular/common/http";
+import {AuthenticationService, DataService, MemoryService} from "./services";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -19,6 +20,7 @@ describe('AppComponent', () => {
         })
       ],
       schemas : [CUSTOM_ELEMENTS_SCHEMA],
+      providers :[AuthenticationService,DataService,MemoryService],
       declarations: [
         AppComponent
       ],
@@ -28,10 +30,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
-  it(`should have as title 'app'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app');
   }));
 });

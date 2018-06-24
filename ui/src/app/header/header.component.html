@@ -1,32 +1,51 @@
 <div class="containerHead">
+
+
   <div class="logo">
     <a>
       <img src="./assets/img/{{imgLogo}}" alt="logo" height="80" width="80"> </a>
   </div>
-  <div class="separator"></div>
-  <button mat-fab (click)="openLoginPopup()">
-    <mat-icon>person</mat-icon>
-  </button>
 
-<!--  <div class="containerUserProfil">
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>
-      <span class="{{userPicture}}">
-        <img src="./assets/img/picture.png" alt="user picture" height="64" width="64">
+  <div class="separator"></div>
+
+
+  <div class="containerUserProfil">
+
+    <!--- IF USER IS LOG OUT --->
+    <div *ngIf="loginState == false;else loginStateTrue ">
+      <button mat-fab (click)="openLoginPopup()">
+        <span>
+        <mat-icon>home</mat-icon>
+          </span>
+      </button>
+    </div>
+
+    <!--- IF USER IS LOG IN --->
+    <ng-template #loginStateTrue>
+
+
+       <span class="badge"> 5 </span>
+      <button mat-fab (click)="openLoginPopup()">
+      <span>
+        <mat-icon>notification_important</mat-icon>
       </span>
-      </mat-icon>
-    </button>
-    <mat-menu class="headerMenu" #menu="matMenu" yPosition="above">
-      <button mat-menu-item>
-        <span class="userName">{{userName}}</span>
       </button>
-      <button mat-menu-item>
-        <span class="userName">{{userMail}}</span>
+
+      <div class="delimitor"></div>
+
+
+      <button mat-fab [matMenuTriggerFor]="menu">
+        <mat-icon>sentiment_very_satisfied</mat-icon>
       </button>
-      <button mat-menu-item *ngFor="let menuItem of userMenuList">
-        <i id="icoheader" class="material-icons">{{menuItem.icon}}</i>
-        <span class="itemheader">{{menuItem.itemName}}</span>
-      </button>
-    </mat-menu>
-  </div>-->
+
+      <mat-menu class="headerMenu" #menu="matMenu" [overlapTrigger]="false" yPosition="below" >
+        <button mat-menu-item *ngFor="let menuItem of userMenuList" (click)="logout()">
+          <i id="icoheader" class="material-icons">{{menuItem.icon}}</i>
+          <span class="itemheader">{{menuItem.itemName}}</span>
+        </button>
+      </mat-menu>
+    </ng-template>
+
+  </div>
+
 </div>
