@@ -14,7 +14,7 @@ public class RankingController extends Controller{
      * @param id
      * @return
      */
-    public Result getUserTournamentsTournamentById(int id) {
+    public Result getUserTournamentsTournamentById(Integer id) {
         RankingService rankingService = new RankingService();
         return ok(Json.toJson(rankingService.getTournamentById(id).getUserTournements()).toString());
     }

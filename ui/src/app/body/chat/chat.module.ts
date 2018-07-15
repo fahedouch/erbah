@@ -20,6 +20,7 @@ import {
 import {HttpClient} from "@angular/common/http";
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ConnectedPeopleComponent} from "../connected-people/connected-people.component";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -62,7 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ChatComponent
   ],
   declarations: [ChatComponent],
-  providers: [SocketService,MatDialog],
+  providers: [SocketService,MatDialog,ChatComponent,ConnectedPeopleComponent],
   schemas : [CUSTOM_ELEMENTS_SCHEMA]
 
 })

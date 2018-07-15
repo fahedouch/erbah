@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { ChatComponent } from './chat.component';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {HttpLoaderFactory} from "../app.module";
+import {HttpLoaderFactory} from "../../app.module";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {SocketService} from "./shared/services/socket.service";
 import {MatDialog, MatDialogModule} from "@angular/material";
-import {MaterialModule} from "../material.module";
+import {MaterialModule} from "../../material.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('ChatComponent', () => {

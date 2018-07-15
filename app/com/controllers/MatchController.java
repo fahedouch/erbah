@@ -16,7 +16,7 @@ public class MatchController extends  Controller{
      * @param id : Tournament Id
      * @return matchs
      */
-    public Result getMatchByTournamentId(int id) {
+    public Result getMatchByTournamentId(Integer id) {
         MatchService matchService = new MatchService();
         return ok(Json.toJson(matchService.getTournamentById(id).getFootmatches()).toString());
     }

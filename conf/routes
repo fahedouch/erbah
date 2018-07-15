@@ -6,10 +6,10 @@
 
 GET     /api/UserTournamentsTournament/:id                        com.controllers.RankingController.getUserTournamentsTournamentById(id :Integer)
 
-GET     /api/MatchTournament/:id                        com.controllers.MatchController.getMatchByTournamentId(id :Integer)
+GET     /api/MatchTournament/:id                                   com.controllers.MatchController.getMatchByTournamentId(id :Integer)
 
-GET     /api/Tournament                              com.controllers.RankingController.getTournament()
+GET     /api/Tournament                                            com.controllers.RankingController.getTournament()
 
-POST    /api/authenticate                            com.controllers.authentificationContoller.login()
+POST    /api/authenticate                                           com.controllers.AuthentificationContoller.login()
 
-GET      /api/CSRFToken/                             com.controllers.authentificationContoller.getCsrfToken()
+GET      /api/CSRFToken/                                              com.controllers.AuthentificationContoller.getCsrfToken()

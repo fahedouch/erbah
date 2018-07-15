@@ -8,102 +8,135 @@ import {Club} from "./club";
 export class User {
 
   @Column({ columnName: `user_id`, type: `int(11)`, nullable: false, generated: true, primaryKey: true, default: null })
-  _userId: number;
+  userId: number;
 
   @Column({ columnName: `user_name`, type: `varchar(45)`, default: null })
-  _userName?: string;
+  userName?: string;
 
   @Column({ columnName: `user_email`, type: `varchar(45)`, default: null })
-  _userEmail?: string;
+  userEmail?: string;
 
   @Column({ columnName: `user_password`, type: `varchar(45)`, default: null })
-  _userPassword?: string;
+  userPassword?: string;
 
   @Column({ columnName: `club_id`, type: `int(11)`, nullable: false, default: null, index: true })
-  _clubId: number;
+  clubId: number;
 
   @Column({ columnName: `user_pseudo`, type: `varchar(255)`, default: null })
-  _userPseudo?: string;
+  userPseudo?: string;
 
-  @ManyToOne(type => User, x => x._clubId)
-  _club: Club;
+  @ManyToOne(type => User, x => x.clubId)
+  club: Club;
 
   @OneToMany(type => UserFootmatch, x => x.userId)
-  _userFootmatches: UserFootmatch[];
+  userFootmatches: UserFootmatch[];
 
   @OneToMany(type => UserTournement, x => x.userId)
-  _userTournements: UserTournement[];
+  userTournements: UserTournement[];
 
+  userAvatar : string;
 
-  public get clubId(): number {
-    return this._clubId;
+  private userStatusOn : boolean;
+
+  constructor(userId?: number, userName?: string, userEmail?: string, userPassword?: string, clubId?: number, userPseudo?: string, club?: Club, userFootmatches?: UserFootmatch[], userTournements?: UserTournement[], userAvatar?: string) {
+    this.userId = userId;
+    this.userName = userName;
+    this.userEmail = userEmail;
+    this.userPassword = userPassword;
+    this.clubId = clubId;
+    this.userPseudo = userPseudo;
+    this.club = club;
+    this.userFootmatches = userFootmatches;
+    this.userTournements = userTournements;
+    this.userAvatar = userAvatar;
   }
 
-  public set clubId(value: number) {
-    this._clubId = value;
+
+  public getuserStatusOn(): boolean {
+    return this.userStatusOn;
   }
 
-  public get userPseudo(): string {
-    return this._userPseudo;
+  public setuserStatusOn(value: boolean) {
+    this.userStatusOn = value;
   }
 
-  public set userPseudo(value: string) {
-    this._userPseudo = value;
+  public setuserAvatar(value: string) {
+    this.userAvatar = value;
   }
 
-  public get club(): Club {
-    return this._club;
+  public getuserAvatar(): string {
+    return this.userAvatar;
   }
 
-  public set club(value: Club) {
-    this._club = value;
+  public getClubId(): number {
+    return this.clubId;
   }
 
-  public get userId(): number {
-    return this._userId;
+  public setClubId(value: number) {
+    this.clubId = value;
   }
 
-  public set userId(value: number) {
-    this._userId = value;
+  public getUserPseudo(): string {
+    return this.userPseudo;
   }
 
-  public get userName(): string {
-    return this._userName;
+  public setUserPseudo(value: string) {
+    this.userPseudo = value;
   }
 
-  public set userName(value: string) {
-    this._userName = value;
+  public getClub(): Club {
+    return this.club;
   }
 
-  public get userEmail(): string {
-    return this._userEmail;
+  public setClub(value: Club) {
+    this.club = value;
   }
 
-  public set userEmail(value: string) {
-    this._userEmail = value;
+  public getUserId(): number {
+    return this.userId;
   }
 
-  public get userPassword(): string {
-    return this._userPassword;
+  public setUserId(value: number) {
+    this.userId = value;
   }
 
-  public set userPassword(value: string) {
-    this._userPassword = value;
+  public getUserName(): string {
+    return this.userName;
   }
 
-  public get userFootmatches(): UserFootmatch[] {
-    return this._userFootmatches;
+  public setUserName(value: string) {
+    this.userName = value;
   }
 
-  public set userFootmatches(value: UserFootmatch[]) {
-    this._userFootmatches = value;
+  public getUserEmail(): string {
+    return this.userEmail;
   }
 
-  public get userTournements(): UserTournement[] {
-    return this._userTournements;
+  public setUserEmail(value: string) {
+    this.userEmail = value;
   }
 
-  public set userTournements(value: UserTournement[]) {
-    this._userTournements = value;
+  public getUserPassword(): string {
+    return this.userPassword;
+  }
+
+  public setUserPassword(value: string) {
+    this.userPassword = value;
+  }
+
+  public getUserFootmatches(): UserFootmatch[] {
+    return this.userFootmatches;
+  }
+
+  public setUserFootmatches(value: UserFootmatch[]) {
+    this.userFootmatches = value;
+  }
+
+  public getUserTournements(): UserTournement[] {
+    return this.userTournements;
+  }
+
+  public setUserTournements(value: UserTournement[]) {
+    this.userTournements = value;
   }
 }

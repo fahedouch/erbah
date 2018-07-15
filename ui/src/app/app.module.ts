@@ -33,15 +33,16 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatPaginatorIntl } from "@angular/material";
 import { MatchComponent } from './body/match/match.component';
-import {DataService} from './services/data.service';
 import "reflect-metadata";
 import { RulesComponent } from './rules/rules.component';
 import { RulesDialogComponent } from './rules/rules-dialog/rules-dialog.component';
-import { ChatModule } from './chat/chat.module';
+import { ChatModule } from './body/chat/chat.module';
 import {DialogUserComponent} from "./dialog-user/dialog-user.component";
-import {AuthenticationService} from "./services/authentication.service";
-import { MemoryService } from './services';
-
+import { DataService , MemoryService , AuthenticationService } from './services';
+import { ConnectedPeopleComponent } from './body/connected-people/connected-people.component';
+import {JwtHelper} from "./header/JwtHelper";
+import {ChatComponent} from "./body/chat/chat.component";
+import {User} from "./models";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -58,7 +59,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatchComponent,
     RulesComponent,
     RulesDialogComponent,
-    DialogUserComponent
+    DialogUserComponent,
+    ConnectedPeopleComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +99,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
   ],
   entryComponents: [RulesDialogComponent,DialogUserComponent],
-  providers: [{ provide: MatPaginatorIntl, useClass: RakingComponent},DataService,AuthenticationService, MemoryService],
+  providers: [{ provide: MatPaginatorIntl, useClass: RakingComponent},DataService,AuthenticationService, MemoryService,ChatComponent],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

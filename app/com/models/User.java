@@ -29,6 +29,8 @@ public class User implements Serializable {
 	@Column(name="user_password")
 	private String userPassword;
 
+	@Column(name="user_status_on")
+	private int userStatusOn;
 
 	//bi-directional many-to-one association to Club
 	@ManyToOne
@@ -46,6 +48,14 @@ public class User implements Serializable {
 	private List<UserTournement> userTournements;
 
 	public User() {
+	}
+
+	public int getuserStatusOn() {
+					return userStatusOn;
+	}
+
+	public void setuserStatusOn(int userStatusOn) {
+					this.userStatusOn = userStatusOn;
 	}
 
 	public UserPK getId() {

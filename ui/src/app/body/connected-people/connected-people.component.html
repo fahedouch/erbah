@@ -1,0 +1,12 @@
+  <ul class="user-list-ul">
+    <li *ngFor="let name of connectedPeoplePseudo" class="user-list__item">
+      <div>
+        <input class="check-box" type="checkbox" [checked]="true" disabled>
+      </div>
+      <div class="user-list__content">
+        <div class="user-list__name">
+          <div class="text text_size_m">{{name}}</div>
+        </div>
+      </div>
+    </li>
+  </ul>

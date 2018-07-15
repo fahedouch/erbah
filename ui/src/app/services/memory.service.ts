@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
+import {SocketService} from "../body/chat/shared/services/socket.service";
 
 @Injectable()
 export class MemoryService {
@@ -9,8 +10,11 @@ export class MemoryService {
 
   private JWTtoken = new BehaviorSubject<string>('token');
 
+  public  socketService = new SocketService() ;
 
-  constructor() { }
+  constructor() {
+    this.socketService.initSocket();
+  }
 
   /**
    * get CSRF token Subject

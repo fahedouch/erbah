@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogUserComponent } from './dialog-user.component';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {SocketService} from "../chat/shared/services/socket.service";
+import {SocketService} from "../body/chat/shared/services/socket.service";
 import {CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA} from "@angular/core";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angular/material";
