@@ -19,4 +19,12 @@ public class UserService {
        return  userDao.findUserbyPseudo(pseudo);
     }
 
+    /**
+     * update User Connection Status
+     * @param pseudo
+     */
+    public void updateUserConnectionStatus(String pseudo, int Status){
+         userDao.updateUserConnectionStatus(pseudo , Status);
+    }
+
 }

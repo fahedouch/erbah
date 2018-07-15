@@ -3,7 +3,13 @@
     <mat-tab-group class="body-tab-group">
       <mat-tab [label]="'home' | translate" >
         <div class="body-tab-content">
-        <tcc-chat></tcc-chat>
+          <div class="firstSubChild contain">
+            <tcc-chat></tcc-chat>
+          </div>
+
+          <div class="secondSubChild">
+            <app-connected-people></app-connected-people>
+          </div>
         </div>
       </mat-tab>
       <mat-tab [label]="'raking' | translate">

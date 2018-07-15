@@ -1,19 +1,17 @@
 <div class="chat-container">
   <mat-card class="main-card">
     <mat-list class="chat-list">
-      <mat-list-item *ngFor="let message of messages" [ngClass]="[(message.action === undefined && message.from.id === user.id)? 'chat-list-item': '']">
-        <img mat-list-avatar *ngIf="message.action === undefined" [src]="message.from.avatar">
+      <mat-list-item *ngFor="let message of messages" [ngClass]="[(message.action === undefined && message.from.userId === user.userId)? 'chat-list-item': '']">
+
+        <img mat-list-avatar *ngIf="message.action === undefined" [src]="message.from.userAvatar">
         <h4 mat-line *ngIf="message.action === undefined">
-          <b>{{message.from.name}}</b>
+          <b>{{message.from.userName}}</b>
         </h4>
         <p mat-line *ngIf="message.action === undefined">
           <span> {{message.content}} </span>
         </p>
         <p mat-line *ngIf="message.action === action.JOINED" class="chat-notification">
-          <span> <b>{{message.from.name}}</b> {{ 'joinChat' | translate }} </span>
-        </p>
-        <p mat-line *ngIf="message.action === action.RENAME" class="chat-notification">
-          <span> <b>{{message.content.previousUsername}}</b> {{ 'isNow' | translate }} <b>{{message.content.username}}</b> </span>
+          <span> <b>{{message.from.userName}}</b> {{ 'joinChat' | translate }} </span>
         </p>
       </mat-list-item>
     </mat-list>

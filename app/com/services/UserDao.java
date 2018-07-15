@@ -21,4 +21,12 @@ public class UserDao {
                 .findOne();
         return user;
     }
+
+    /**
+     * update user connection Status
+     * @param pseudo
+     */
+    void updateUserConnectionStatus (String pseudo , int Status) {
+        Ebean.update(User.class).set("user_status_on",Status).where().eq("user_pseudo",pseudo).update();
+    }
 }

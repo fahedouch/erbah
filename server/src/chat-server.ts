@@ -42,14 +42,24 @@ export class ChatServer {
 
         this.io.on('connect', (socket: any) => {
             console.log('Connected client on port %s.', this.port);
-            socket.on('message', (m: Message) => {
-                console.log('[server](message): %s', JSON.stringify(m));
-                this.io.emit('message', m);
-            });
+                socket.on('message', (m: Message) => {
+                        console.log('[server](message): %s', JSON.stringify(m));
+                        this.io.emit('message', m);
+                 });
 
-            socket.on('disconnect', () => {
-                console.log('Client disconnected');
-            });
+																socket.on('login', (userPseudo: string) => {
+																								console.log('[server](login): %s', JSON.stringify(userPseudo));
+																								this.io.emit('login', userPseudo);
+																});
+
+																socket.on('logout', (userPseudo: string) => {
+																								console.log('[server](logout): %s', JSON.stringify(userPseudo));
+																								this.io.emit('logout', userPseudo);
+																});
+																socket.on('disconnect', () => {
+																								console.log('Client disconnected');
+																});
+
         });
     }
 

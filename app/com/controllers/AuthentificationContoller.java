@@ -21,7 +21,7 @@ import com.services.UserService;
  * Date: 27/05/2018
  * Time: 17:13
  */
-public class authentificationContoller extends Controller {
+public class AuthentificationContoller extends Controller {
 
     @Inject
     private Config config;
@@ -33,7 +33,7 @@ public class authentificationContoller extends Controller {
      */
     public Result getCsrfToken() {
         if (CSRF.getToken(Controller.request()) != null) {
-            return ok(CSRF.getToken(Controller.request()).get().value());
+            return ok(CSRF.getToken(Controller.request()).get().value().toString());
         } else {
             return ok("CSRF Token error");
         }
@@ -68,8 +68,9 @@ public class authentificationContoller extends Controller {
                 (this.userService.findUserbyPseudo(body.get("pseudo").asText()) != null) &&
                 (this.userService.findUserbyPseudo(body.get("pseudo").asText()).getUserPassword().equals(body.get("password").asText()))) {
 
-
+            this.userService.updateUserConnectionStatus(body.get("pseudo").asText() , 1);
             result.put("jwt_token", getSignedToken(new Long(this.userService.findUserbyPseudo(body.get("pseudo").asText()).getId().getUserId())));
+            //TO DO put in token list of connected people
             return ok(result);
         }
 
@@ -91,6 +92,11 @@ public class authentificationContoller extends Controller {
                 .withIssuer("ThePlayApp")
                 .withClaim("user_id", userId)
                 .sign(algorithm);
+    }
+
+    private void updateUserConnectionStatus(){
+        JsonNode body = request().body().asJson();
+
     }
 
 

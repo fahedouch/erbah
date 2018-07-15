@@ -1,4 +1,4 @@
-import {User} from './user';
+import {User} from "./index";
 import {Action} from './action';
 
 export interface Message {

@@ -15,7 +15,6 @@ export class DialogUserComponent implements OnInit {
   rForm: FormGroup;
   entryMode = new BehaviorSubject<String>(null);
   error: boolean;
-  @Output() loginState = new EventEmitter();
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public params: any,
@@ -30,6 +29,11 @@ export class DialogUserComponent implements OnInit {
     this.error = false;
   }
 
+  /**
+   * match password verification
+   * @param {AbstractControl} AC
+   * @returns {null}
+   */
   static matchPassword(AC: AbstractControl) {
     let password = AC.get('password').value;
     let confirmPassword = AC.get('confirmPassword').value;
@@ -100,18 +104,24 @@ export class DialogUserComponent implements OnInit {
   login(post) {
     this.error = false;
     this.authenticationService.login(post.pseudo, post.password)
-      .subscribe(result => {
-          if (result === true) {
-            this.dialogRef.close();
-            this.loginState.emit(true);
-          } else {
-            this.error = true;
-            this.loginState.emit(false);
-          }
-        },
+      .subscribe(result => this.loginHandle(result),
         (err) => {
           console.log('here i shloud make a logging system')
         });
   }
+
+  /**
+   * Handle login : if success handle params and close else error messge
+   * @param result
+   */
+  loginHandle (result) : void {
+      if (result === true) {
+        this.dialogRef.close({
+          loginState : true
+        });
+      } else {
+        this.error = true;
+      }
+    }
 
 }
