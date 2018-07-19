@@ -38,7 +38,12 @@ export class User {
 
   private userStatusOn : boolean;
 
-  constructor(userId?: number, userName?: string, userEmail?: string, userPassword?: string, clubId?: number, userPseudo?: string, club?: Club, userFootmatches?: UserFootmatch[], userTournements?: UserTournement[], userAvatar?: string) {
+  private userRole : string;
+
+
+  constructor(userId?: number, userName?: string, userEmail?: string, userPassword?: string, clubId?: number,
+              userPseudo?: string, club?: Club, userFootmatches?: UserFootmatch[], userTournements?: UserTournement[],
+              userAvatar?: string, userRole? : string) {
     this.userId = userId;
     this.userName = userName;
     this.userEmail = userEmail;
@@ -49,8 +54,17 @@ export class User {
     this.userFootmatches = userFootmatches;
     this.userTournements = userTournements;
     this.userAvatar = userAvatar;
+    this.userRole = userRole;
   }
 
+
+  public getuserRole(): string {
+    return this.userRole;
+  }
+
+  public setuserRole(value: string) {
+    this.userRole = value;
+  }
 
   public getuserStatusOn(): boolean {
     return this.userStatusOn;
