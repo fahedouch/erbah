@@ -18,7 +18,7 @@ export class DialogUserComponent implements OnInit {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public params: any,
-              public fb: FormBuilder,
+              private fb: FormBuilder,
               private dialogRef: MatDialogRef<DialogUserComponent>,
               private authenticationService: AuthenticationService) {
     this.entryMode.next("sign-in");

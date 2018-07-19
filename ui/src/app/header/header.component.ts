@@ -5,7 +5,6 @@ import {MatDialog, MatDialogRef} from "@angular/material";
 import {AuthenticationService} from '../services/index' ;
 import {ChatComponent} from "../body/chat/chat.component";
 import {Action} from "../models/action";
-import {JwtHelper} from "./JwtHelper";
 import {MemoryService} from "../services";
 import {SocketService} from "../body/chat/shared/services/socket.service";
 import {TranslateService} from "@ngx-translate/core";
@@ -46,7 +45,7 @@ export class HeaderComponent implements OnInit {
               private translate: TranslateService) { }
 
   ngOnInit() {
-    this.imgLogo = "logo.png";
+    this.imgLogo = "logo1.png";
     this.menuUser = ['logout'];
     this.userMenuList = [
       {
@@ -76,7 +75,6 @@ export class HeaderComponent implements OnInit {
         this.socketService.initSocket();
 
         this.loginState = this.getLoginState(paramsDialog);
-        console.log( this.loginState);
         if (this.loginState) {
         this.initChatComponent();
         this.setupChat(paramsDialog);
@@ -100,8 +98,8 @@ export class HeaderComponent implements OnInit {
    * @returns {ChatComponent}
    */
   initChatComponent () : void {
-    this.chatComponent.user.userId = this.decodeTokenInSessionStorage().user_id ;
-    this.chatComponent.user.userPseudo = this.getPseudoFromSessionStorage() ;
+    this.chatComponent.user.userId = this.authenticationService.decodeTokenInSessionStorage().user_id ;
+    this.chatComponent.user.userPseudo = this.authenticationService.getPseudoFromSessionStorage() ;
     this.chatComponent.user.userAvatar = `${this.AVATAR_URL}/${1}.png`;
   }
 
@@ -116,33 +114,7 @@ export class HeaderComponent implements OnInit {
 
 
   setupConnectedPeople () {
-    this.connectedPeopleComponent.sendConnectedUserNotification(this.getPseudoFromSessionStorage());
-  }
-
-
-  /**
-   * decode token in Session Storage
-   */
-  decodeTokenInSessionStorage() : TokenType{
-    var jwtHelper  = new JwtHelper();
-    return jwtHelper.decodeToken(this.getTokenFromSessionStorage());
-  }
-
-
-  /**
-   * get Token From Session Storage
-   * @returns {string}
-   */
-  getTokenFromSessionStorage() : string{
-   return  JSON.parse(sessionStorage.getItem('currentUser')).token;
-  }
-
-  /**
-   * get Pseudo From Session Storage
-   * @returns {string}
-   */
-  getPseudoFromSessionStorage() : string{
-    return  JSON.parse(sessionStorage.getItem('currentUser')).pseudo;
+    this.connectedPeopleComponent.sendConnectedUserNotification(this.authenticationService.getPseudoFromSessionStorage());
   }
 
 
@@ -150,14 +122,9 @@ export class HeaderComponent implements OnInit {
    * Session user logout
    */
   private logout(): void{
-    this.connectedPeopleComponent.sendDisconnectedUserNotification(this.getPseudoFromSessionStorage());
+    this.connectedPeopleComponent.sendDisconnectedUserNotification(this.authenticationService.getPseudoFromSessionStorage());
     this.authenticationService.logout();
     this.loginState = false;
   }
 
-}
-
-interface TokenType {
-  iss : string;
-  user_id : number;
 }

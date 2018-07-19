@@ -40,7 +40,7 @@ import { ChatModule } from './body/chat/chat.module';
 import {DialogUserComponent} from "./dialog-user/dialog-user.component";
 import { DataService , MemoryService , AuthenticationService } from './services';
 import { ConnectedPeopleComponent } from './body/connected-people/connected-people.component';
-import {JwtHelper} from "./header/JwtHelper";
+import {JwtHelper} from "./services/JwtHelper";
 import {ChatComponent} from "./body/chat/chat.component";
 import {User} from "./models";
 

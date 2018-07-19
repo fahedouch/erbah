@@ -32,6 +32,9 @@ public class User implements Serializable {
 	@Column(name="user_status_on")
 	private int userStatusOn;
 
+	@Column(name="user_role")
+	private String userRole;
+
 	//bi-directional many-to-one association to Club
 	@ManyToOne
 	@JoinColumn(name="club_id")
@@ -48,6 +51,14 @@ public class User implements Serializable {
 	private List<UserTournement> userTournements;
 
 	public User() {
+	}
+
+	public String getUserRole() {
+								return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+								this.userRole = userRole;
 	}
 
 	public int getuserStatusOn() {

@@ -4,11 +4,12 @@ import {DataService} from "./data.service";
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import {MemoryService} from "./memory.service";
+import {JwtHelper} from "./JwtHelper";
 
 @Injectable()
 export class AuthenticationService {
-  public token: string;
-  public CSRFtoken: string;
+  private token: string;
+  private CSRFtoken: string;
   private tokenModel : any = {jwt_token:null};
 
   constructor(private http: HttpClient,
@@ -63,4 +64,45 @@ export class AuthenticationService {
     this.token = null;
     sessionStorage.removeItem('currentUser');
   }
+
+  /**
+   * decode token in Session Storage
+   */
+  public decodeTokenInSessionStorage() : TokenType{
+    var jwtHelper  = new JwtHelper();
+    return jwtHelper.decodeToken(this.getTokenFromSessionStorage());
+  }
+
+
+  /**
+   * get Token From Session Storage
+   * @returns {string}
+   */
+  public getTokenFromSessionStorage() : string{
+    return  JSON.parse(sessionStorage.getItem('currentUser')).token;
+  }
+
+
+  /**
+   * get Pseudo From Session Storage
+   * @returns {string}
+   */
+  public getPseudoFromSessionStorage() : string{
+    return  JSON.parse(sessionStorage.getItem('currentUser')).pseudo;
+  }
+
+
+  public canActivate() {
+    if (sessionStorage.getItem('currentUser')) {
+      return true;
+    }
+  }
+
 }
+
+interface TokenType {
+  iss : string;
+  user_id : number;
+  user_role : string;
+}
+

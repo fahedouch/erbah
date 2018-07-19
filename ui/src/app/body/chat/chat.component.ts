@@ -1,17 +1,16 @@
 import {
-  Component, OnInit, ViewChildren, ViewChild, Injectable, QueryList, ElementRef,
+  Component, OnInit, ViewChildren, ViewChild, QueryList, ElementRef,
   AfterViewChecked
 } from '@angular/core';
 import { MatDialog, MatDialogRef, MatList, MatListItem } from '@angular/material';
 
 import { Action } from '../../models/action';
-import { Event } from '../../models/event';
 import { Message } from '../../models/message';
 import { User } from '../../models/index';
 import { SocketService } from './shared/services/socket.service';
 import { DialogUserComponent } from '../../dialog-user/dialog-user.component';
 import {TranslateService} from '@ngx-translate/core';
-import {DataService} from "../../services";
+import {AuthenticationService, DataService} from "../../services";
 import {MemoryService} from "../../services";
 
 const AVATAR_URL = 'https://api.adorable.io/avatars/285';
@@ -22,7 +21,7 @@ const AVATAR_URL = 'https://api.adorable.io/avatars/285';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, AfterViewChecked {
+export class ChatComponent implements OnInit, AfterViewChecked  {
   action = Action;
   messages: Message[] = [];
   messageContent: string;
@@ -42,6 +41,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
               public dialog: MatDialog,
               private translate: TranslateService,
               private dataService : DataService,
+              private authenticationService: AuthenticationService,
               private memoryService : MemoryService) {
 
     translate.setDefaultLang('en');
@@ -53,12 +53,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.addMessageInMessages();
   }
 
+
   ngAfterViewChecked(): void {
     // subscribing to any changes in the list of items / messages
     this.matListItems.changes.subscribe(elements => {
       this.scrollToBottom();
     });
   }
+
 
   // auto-scroll fix: inspired by this stack overflow post
   // https://stackoverflow.com/questions/35232731/angular2-scroll-to-bottom-chat-style
@@ -129,5 +131,12 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.memoryService.socketService.sendMessage(message);
   }
 
+
+  enbaleDisableInput() : boolean {
+     if (this.authenticationService.canActivate())
+       return false;
+     else
+       return true;
+     }
 
 }
