@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MemoryService} from "../../services";
 import {Event} from "../../models/event";
 import {SocketService} from "../chat/shared/services/socket.service";
@@ -9,7 +9,7 @@ import {User} from "../../models";
   templateUrl: './connected-people.component.html',
   styleUrls: []
 })
-export class ConnectedPeopleComponent implements OnInit , AfterViewInit   {
+export class ConnectedPeopleComponent implements OnInit {
 
   connectedPeoplePseudo : string[] = [];
   user  = new User();
@@ -68,8 +68,4 @@ export class ConnectedPeopleComponent implements OnInit , AfterViewInit   {
     return  this.connectedPeoplePseudo.indexOf(this.user.userPseudo);
   }
 
-  ngAfterViewInit(){
-    console.log(this.connectedPeoplePseudo);
-
-  }
 }
