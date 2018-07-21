@@ -39,7 +39,7 @@
       </button>
 
       <mat-menu class="headerMenu" #menu="matMenu" [overlapTrigger]="false" yPosition="below" >
-        <button mat-menu-item *ngFor="let menuItem of userMenuList" (click)="logout()">
+        <button mat-menu-item *ngFor="let menuItem of userMenuList" (click)="prepareAndLogout()">
           <i id="icoheader" class="material-icons">{{menuItem.icon}}</i>
           <span class="itemheader">{{menuItem.itemName}}</span>
         </button>

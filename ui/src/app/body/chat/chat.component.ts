@@ -74,9 +74,9 @@ export class ChatComponent implements OnInit, AfterViewChecked  {
   /**
    * User Model initalization
    */
-  public initModel(userId : number , userPseudo: string): void {
-    this.user.userId = userId;
-    this.user.userPseudo = userPseudo;
+  public initModel(): void {
+    this.user.userId = this.authenticationService.decodeTokenInSessionStorage().user_id;
+    this.user.userPseudo = this.authenticationService.getPseudoFromSessionStorage();
     this.user.userAvatar = `${AVATAR_URL}/${1}.png`;
   }
 
@@ -101,6 +101,9 @@ export class ChatComponent implements OnInit, AfterViewChecked  {
     if (!message) {
       return;
     }
+    if (this.authenticationService.canActivate())
+      this.initModel();
+
     this.memoryService.socketService.sendMessage({
       from: this.user,
       content: message
@@ -108,22 +111,22 @@ export class ChatComponent implements OnInit, AfterViewChecked  {
     this.messageContent = null;
   }
 
+
   /**
    * send Notification joind or left
    * @param params
    * @param {Action} action
    */
-  public sendMessageNotification(params: any, action: Action): void {
+  public sendMessageNotification(user: User, action: Action): void {
     let message: Message;
-
     if (action === Action.JOINED) {
       message = {
-        from: this.user,
+        from: user,
         action: action
       }
     } else if (action === Action.LEFT) {
       message = {
-        from: this.user,
+        from: user,
         action: action,
       };
     }

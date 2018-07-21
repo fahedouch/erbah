@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
               private translate: TranslateService) { }
 
   ngOnInit() {
-    this.imgLogo = "logo1.png";
+    this.imgLogo = "logo3.png";
     this.menuUser = ['logout'];
     this.userMenuList = [
       {
@@ -77,8 +77,8 @@ export class HeaderComponent implements OnInit {
         this.loginState = this.getLoginState(paramsDialog);
         if (this.loginState) {
         this.initChatComponent();
-        this.setupChat(paramsDialog);
-        this.setupConnectedPeople();
+        this.setupChatAfterLogin();
+        this.setupConnectedPeopleAfterLogin();
      }
     });
   }
@@ -108,12 +108,12 @@ export class HeaderComponent implements OnInit {
    * setup chat
    * @param paramsDialog
    */
-  setupChat (paramsDialog) : void {
-    this.chatComponent.sendMessageNotification(paramsDialog, Action.JOINED);
+  setupChatAfterLogin () : void {
+    this.chatComponent.sendMessageNotification(this.chatComponent.user, Action.JOINED);
   }
 
 
-  setupConnectedPeople () {
+  setupConnectedPeopleAfterLogin () {
     this.connectedPeopleComponent.sendConnectedUserNotification(this.authenticationService.getPseudoFromSessionStorage());
   }
 
@@ -121,10 +121,18 @@ export class HeaderComponent implements OnInit {
   /**
    * Session user logout
    */
-  private logout(): void{
-    this.connectedPeopleComponent.sendDisconnectedUserNotification(this.authenticationService.getPseudoFromSessionStorage());
+  private prepareAndLogout(): void{
+    this.setupChatBeforeLogout();
+    this.setupConnectedPeopleBeforeLogout();
     this.authenticationService.logout();
     this.loginState = false;
   }
 
+  setupChatBeforeLogout() : void {
+    this.chatComponent.sendMessageNotification(this.chatComponent.user, Action.LEFT);
+  }
+
+  setupConnectedPeopleBeforeLogout () {
+    this.connectedPeopleComponent.sendDisconnectedUserNotification(this.authenticationService.getPseudoFromSessionStorage());
+  }
 }
