@@ -1,7 +1,7 @@
 import { createServer, Server } from 'http';
 import * as express from 'express';
 import * as socketIo from 'socket.io';
-
+import * as jwt from 'jsonwebtoken';
 import { Message } from './model';
 
 export class ChatServer {
@@ -42,19 +42,30 @@ export class ChatServer {
 
         this.io.on('connect', (socket: any) => {
             console.log('Connected client on port %s.', this.port);
-                socket.on('message', (m: Message) => {
-                        console.log('[server](message): %s', JSON.stringify(m));
-                        this.io.emit('message', m);
+                socket.on('message', (data : any) => {
+                								try {
+                																this.jwtCheckthenEmit('message',data);
+																								}catch(e){
+                																return e.message;
+																								}
                  });
 
-																socket.on('login', (userPseudo: string) => {
-																								console.log('[server](login): %s', JSON.stringify(userPseudo));
-																								this.io.emit('login', userPseudo);
+																socket.on('login', (data : any) => {
+																								try {
+																																this.jwtCheckthenEmit('login',data);
+																								}catch(e){
+																																return e.message;
+																								}
+
 																});
 
-																socket.on('logout', (userPseudo: string) => {
-																								console.log('[server](logout): %s', JSON.stringify(userPseudo));
-																								this.io.emit('logout', userPseudo);
+																socket.on('logout', (data : any) => {
+																								try {
+																																this.jwtCheckthenEmit('logout',data);
+																								}catch(e){
+																																return e.message;
+																								}
+
 																});
 																socket.on('disconnect', () => {
 																								console.log('Client disconnected');
@@ -63,7 +74,32 @@ export class ChatServer {
         });
     }
 
+    public jwtCheckthenEmit( type : string, data: any) {
+												this.checkJwt(data.token);
+												console.log('[server]('+type+'): %s', JSON.stringify(data.dataContent));
+												this.io.emit(type, data.dataContent);
+				}
+
+    public checkJwt(token: string) : any {
+												//if (token == null) return new Error('Authentication error');
+												try {
+																				jwt.verify(token, 'fahedd');
+												}catch(err){
+																				throw new Error('invalid Token');
+												}
+				}
+
     public getApp(): express.Application {
         return this.app;
     }
+}
+
+export class InvalidToken{
+
+								private message : string;
+
+								constructor(message: string) {
+																this.message = message;
+								}
+
 }

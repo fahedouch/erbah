@@ -11,6 +11,9 @@ import {User} from "../../models";
 })
 export class ConnectedPeopleComponent implements OnInit {
 
+
+
+
   connectedPeoplePseudo : string[] = [];
   user  = new User();
 
