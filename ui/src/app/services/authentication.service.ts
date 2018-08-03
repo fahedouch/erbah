@@ -12,9 +12,9 @@ export class AuthenticationService {
   private CSRFtoken: string;
   private tokenModel : any = {jwt_token:null};
 
-  constructor(private http: HttpClient,
-              private dataService : DataService,
-              private memoryService : MemoryService) {
+  constructor(private http?: HttpClient,
+              private dataService? : DataService,
+              private memoryService? : MemoryService) {
 
     // set token if saved in local storage
     var currentUser = JSON.parse(sessionStorage.getItem('currentUser'));

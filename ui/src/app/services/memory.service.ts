@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {SocketService} from "../body/chat/shared/services/socket.service";
+import {AuthenticationService} from "./index";
+import {HttpClient} from "@angular/common/http";
+import {DataService} from "./data.service";
 
 @Injectable()
 export class MemoryService {
