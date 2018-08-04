@@ -3,6 +3,9 @@ import {Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 
+/**
+ * class to communicate with the back-End , send & receive informations
+ */
 @Injectable()
 export class DataService {
 
