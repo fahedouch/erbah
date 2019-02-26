@@ -20,12 +20,11 @@
 set -o pipefail
 
 IMAGE_TAG=":nightly"  # TODO should be replaced by latest asap (i.e. update latest to be stable)
-PROJECT_NAME="osc-tma3"
+PROJECT_NAME="osc-erbah"
 CONTAINER_NAME="${PROJECT_NAME//-/_}"
 CONTAINER_NETWORK_NAME="${CONTAINER_NAME}_net"
 CONTAINER_WEB_NAME="${CONTAINER_NAME}_web"
 CONTAINER_DB_NAME="${CONTAINER_NAME}_db"
-CONTAINER_GTW_NAME="${CONTAINER_NAME}_gtw"
 BASE_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
 SQL_FILE_VERSION=3
 
@@ -115,15 +114,6 @@ services:
         volumes:
           - ${BASE_PATH}:/home/ux/dev
 
-    ${CONTAINER_GTW_NAME}:
-        image: dockreg-1.dv.admin/gateway/gateway-tinman3
-        container_name: ${CONTAINER_GTW_NAME}
-        privileged: true
-        tty: true
-        networks:
-          - ${CONTAINER_NETWORK_NAME}
-        ports: ["14695:14695"]
-
 networks:
     ${CONTAINER_NETWORK_NAME}:
         driver: bridge
@@ -144,9 +134,9 @@ function setup_db {
     db_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${CONTAINER_DB_NAME})
     if [ "$db_ip" != "" ]
     then
-        schema_file="/home/ux/dev/scripts/schema.sql"
-        data_file="/home/ux/dev/scripts/data.sql"
-        conf_file="/home/ux/dev/conf/application.conf"
+        schema_file="/root/jenkins/scripts/schema.sql"
+        data_file="/root/jenkins/scripts/data.sql"
+        conf_file="/root/jenkins/conf/application.conf"
         echo "Make sur the database is running and reachable..."
         docker exec -t ${CONTAINER_WEB_NAME} bash -c "sed -i 's/jdbc:mysql:\/\/.*\/tinman3/jdbc:mysql:\/\/$db_ip:3306\/tinman3/' $conf_file"
         up=1
@@ -330,8 +320,7 @@ function publish {
         cd $BASE_PATH/
         VERSION=$(version)
         RELEASE=$(release)
-        PROJECT_NAME="osc-tinman3"
-        scp ./build/${PROJECT_NAME}/rpms/${PROJECT_NAME}-${VERSION}-$RELEASE.noarch.rpm root@rpm-repository.dv.admin:/data/rpm_repo/Centos/7/Packages/
+        PROJECT_NAME="osc-erbah"
     )
 }
 
