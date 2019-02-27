@@ -111,6 +111,8 @@ services:
         networks:
           - ${CONTAINER_NETWORK_NAME}
         ports: ["$port_db:3306"]
+        environment:
+          - MYSQL_ROOT_PASSWORD=test
         volumes:
           - ${BASE_PATH}:/home/ux/dev
 
@@ -134,9 +136,9 @@ function setup_db {
     db_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${CONTAINER_DB_NAME})
     if [ "$db_ip" != "" ]
     then
-        schema_file="/workspace/erbah_Continuous/scripts/schema.sql"
-        data_file="/workspace/erbah_Continuous/scripts/data.sql"
-        conf_file="/workspace/erbah_Continuous/conf/application.conf"
+        schema_file="/home/outscale/jenkins/workspace/erbah_Continuous/scripts/schema.sql"
+        data_file="/home/outscale/jenkins/workspace/erbah_Continuous/scripts/data.sql"
+        conf_file="/home/outscale/jenkins/workspace/erbah_Continuous/conf/application.conf"
         echo "Make sur the database is running and reachable..."
         docker exec -t ${CONTAINER_WEB_NAME} bash -c "sed -i 's/jdbc:mysql:\/\/.*\/tinman3/jdbc:mysql:\/\/$db_ip:3306\/tinman3/' $conf_file"
         up=1
