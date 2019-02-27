@@ -158,7 +158,6 @@ function setup_db {
             docker exec -t ${CONTAINER_WEB_NAME} bash -c "echo 'STATUS;' | mysql -u root -p${ROOT_PASSWORD} -h $db_ip -D erbah" | grep  "Server version"
             up=$?
         done
-        CREATE DATABASE menagerie;
         echo "Fill the database with the tables..."
         docker exec -t ${CONTAINER_WEB_NAME} bash -c "mysql -u root -h $db_ip -p${ROOT_PASSWORD} -D erbah < $schema_file"
         echo "Fill the database with the data..."
