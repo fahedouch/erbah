@@ -280,9 +280,9 @@ function setup_conf {
     #echo "Setup database ip in conf: $cip"
     #sed -i "s#db.default.url.*=.*\"jdbc:mysql://.*:3306#db.default.url = \"jdbc:mysql://${cip}:3306#g" $conf_path
 
-    cip="$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${CONTAINER_GTW_NAME})"
-    echo "Setup gateway ip in conf: $cip"
-    sed -i "s#gateway.host.*=.*\"http://.*:14695#gateway.host = \"http://${cip}:14695#g" $conf_path
+    #cip="$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${CONTAINER_GTW_NAME})"
+    #echo "Setup gateway ip in conf: $cip"
+    #sed -i "s#gateway.host.*=.*\"http://.*:14695#gateway.host = \"http://${cip}:14695#g" $conf_path
 }
 
 function connect {
