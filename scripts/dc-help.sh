@@ -141,9 +141,8 @@ function setup_db {
         data_file="/home/ux/dev/scripts/data.sql"
         conf_file="/home/ux/dev/conf/application.conf"
         echo "--************-----"
-        echo $PWD
-        echo $ROOT_PASSWORD
-        chmod 777 $conf_file
+        echo $db_ip
+        
         echo "Make sur the database is running and reachable..."
         docker exec -t ${CONTAINER_WEB_NAME} bash -c "sed -i 's/jdbc:mysql:\/\/.*\/erbah/jdbc:mysql:\/\/$db_ip:3306\/erbah/' $conf_file"
         up=1
