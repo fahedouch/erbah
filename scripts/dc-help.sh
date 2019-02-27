@@ -140,6 +140,8 @@ function setup_db {
         schema_file="./scripts/schema.sql"
         data_file="./scripts/data.sql"
         conf_file="./conf/application.conf"
+        echo "--************-----"
+        echo $PWD
         echo "Make sur the database is running and reachable..."
         docker exec -t ${CONTAINER_WEB_NAME} bash -c "sed -i 's/jdbc:mysql:\/\/.*\/erbah/jdbc:mysql:\/\/$db_ip:3306\/erbah/' $conf_file"
         up=1
@@ -152,13 +154,13 @@ function setup_db {
                 echo -e "\n\e[31m   Unable to reach the database.\e[0m"
                 exit 1
             fi
-            docker exec -t ${CONTAINER_WEB_NAME} bash -c "echo 'STATUS;' | mysql -u root -e MYSQL_ROOT_PASSWORD=$ROOT_PASSWORD -h $db_ip -D tinman3" | grep  "Server version"
+            docker exec -t ${CONTAINER_WEB_NAME} bash -c "echo 'STATUS;' | mysql -u root -e MYSQL_ROOT_PASSWORD=$ROOT_PASSWORD -h $db_ip -D erbah" | grep  "Server version"
             up=$?
         done
         echo "Fill the database with the tables..."
-        docker exec -t ${CONTAINER_WEB_NAME} bash -c "mysql -u root -h $db_ip -e MYSQL_ROOT_PASSWORD=$ROOT_PASSWORD -D tinman3 < $schema_file"
+        docker exec -t ${CONTAINER_WEB_NAME} bash -c "mysql -u root -h $db_ip -e MYSQL_ROOT_PASSWORD=$ROOT_PASSWORD -D erbah < $schema_file"
         echo "Fill the database with the data..."
-        docker exec -t ${CONTAINER_WEB_NAME} bash -c "mysql -u root -h $db_ip -e MYSQL_ROOT_PASSWORD=$ROOT_PASSWORD -D tinman3 < $data_file"
+        docker exec -t ${CONTAINER_WEB_NAME} bash -c "mysql -u root -h $db_ip -e MYSQL_ROOT_PASSWORD=$ROOT_PASSWORD -D erbah < $data_file"
         echo "...done"
     else
         echo -e "\n\e[31m   Unable to reach the MariaDB container... Unable to set up the database.\e[0m"
