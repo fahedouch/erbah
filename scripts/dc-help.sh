@@ -140,8 +140,7 @@ function setup_db {
         schema_file="/home/ux/dev/scripts/schema.sql"
         data_file="/home/ux/dev/scripts/data.sql"
         conf_file="/home/ux/dev/conf/application.conf"
-        echo "Create database..."
-        docker exec -t ${CONTAINER_WEB_NAME} bash -c "mysql -u root -h $db_ip -p${ROOT_PASSWORD} -e 'CREATE DATABASE erbah'"
+
         echo "Make sur the database is running and reachable..."
         docker exec -t ${CONTAINER_WEB_NAME} bash -c "sed -i 's/jdbc:mysql:\/\/.*\/erbah/jdbc:mysql:\/\/$db_ip:3306\/erbah/' $conf_file"
         up=1
@@ -154,6 +153,8 @@ function setup_db {
                 echo -e "\n\e[31m   Unable to reach the database.\e[0m"
                 exit 1
             fi
+            echo "Create database..."
+            docker exec -t ${CONTAINER_WEB_NAME} bash -c "mysql -u root -h $db_ip -p${ROOT_PASSWORD} -e 'CREATE DATABASE erbah'"
             docker exec -t ${CONTAINER_WEB_NAME} bash -c "echo 'STATUS;' | mysql -u root -p${ROOT_PASSWORD} -h $db_ip -D erbah" | grep  "Server version"
             up=$?
         done
