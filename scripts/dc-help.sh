@@ -137,9 +137,9 @@ function setup_db {
     db_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${CONTAINER_DB_NAME})
     if [ "$db_ip" != "" ]
     then
-        schema_file="/scripts/schema.sql"
-        data_file="/scripts/data.sql"
-        conf_file="/conf/application.conf"
+        schema_file="/home/ux/dev/scripts/schema.sql"
+        data_file="/home/ux/dev/scripts/data.sql"
+        conf_file="/home/ux/dev/conf/application.conf"
         echo "--************-----"
         echo $PWD
         echo $ROOT_PASSWORD
@@ -156,13 +156,13 @@ function setup_db {
                 echo -e "\n\e[31m   Unable to reach the database.\e[0m"
                 exit 1
             fi
-            docker exec -t ${CONTAINER_WEB_NAME} bash -c "echo 'STATUS;' | mysql -u root -e MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD} -h $db_ip -D erbah" | grep  "Server version"
+            docker exec -t ${CONTAINER_WEB_NAME} bash -c "echo 'STATUS;' | mysql -u root -p${ROOT_PASSWORD} -h $db_ip -D erbah" | grep  "Server version"
             up=$?
         done
         echo "Fill the database with the tables..."
-        docker exec -t ${CONTAINER_WEB_NAME} bash -c "mysql -u root -h $db_ip -e MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD} -D erbah < $schema_file"
+        docker exec -t ${CONTAINER_WEB_NAME} bash -c "mysql -u root -h $db_ip -p${ROOT_PASSWORD} -D erbah < $schema_file"
         echo "Fill the database with the data..."
-        docker exec -t ${CONTAINER_WEB_NAME} bash -c "mysql -u root -h $db_ip -e MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD} -D erbah < $data_file"
+        docker exec -t ${CONTAINER_WEB_NAME} bash -c "mysql -u root -h $db_ip -p${ROOT_PASSWORD} -D erbah < $data_file"
         echo "...done"
     else
         echo -e "\n\e[31m   Unable to reach the MariaDB container... Unable to set up the database.\e[0m"
