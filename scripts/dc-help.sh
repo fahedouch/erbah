@@ -137,13 +137,13 @@ function setup_db {
     db_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${CONTAINER_DB_NAME})
     if [ "$db_ip" != "" ]
     then
-        schema_file="./scripts/schema.sql"
-        data_file="./scripts/data.sql"
-        conf_file="./conf/application.conf"
+        schema_file="/scripts/schema.sql"
+        data_file="/scripts/data.sql"
+        conf_file="/conf/application.conf"
         echo "--************-----"
         echo $PWD
         echo $ROOT_PASSWORD
-        chmod +x $conf_file
+        chmod 777 $conf_file
         echo "Make sur the database is running and reachable..."
         docker exec -t ${CONTAINER_WEB_NAME} bash -c "sed -i 's/jdbc:mysql:\/\/.*\/erbah/jdbc:mysql:\/\/$db_ip:3306\/erbah/' $conf_file"
         up=1
