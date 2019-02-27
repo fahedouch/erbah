@@ -92,7 +92,7 @@ version: '2.2'
 
 services:
     ${CONTAINER_WEB_NAME}:
-        image: dockreg-1.dv.admin/tina/ux-web${IMAGE_TAG}
+        image: fahedouch/erbah:latest
         container_name: ${CONTAINER_WEB_NAME}
         privileged: true
         tty: true
@@ -104,7 +104,7 @@ services:
           - ${BASE_PATH}:/home/ux/dev
 
     ${CONTAINER_DB_NAME}:
-        image: dockreg-1.dv.admin/tina/ux-db${IMAGE_TAG}
+        image: mariadb
         container_name: ${CONTAINER_DB_NAME}
         privileged: true
         tty: true
