@@ -5,7 +5,7 @@
 set -e
 
 PROJECT_ROOT="/home/ux/dev"
-PROJECT_NAME="osc-tinman3"
+PROJECT_NAME="osc-erbah"
 # TODO Find how to manage the concept of release number (different meaning
 # for nightly than others - can be provided from params or other ways)
 RELEASE=0
@@ -36,7 +36,7 @@ check_environment() {
     echo -e "\n\e[36m - Java version\e[0m"
     if ! [ -x "$(command -v java)" ]
     then
-        echo -e "\e[31m   Need to install Java for Tina 3 Manager\e[0m\n"
+        echo -e "\e[31m   Need to install Java for Erbah\e[0m\n"
     else
         java -version
     fi
@@ -44,7 +44,7 @@ check_environment() {
     echo -e "\n\e[36m - Node version\e[0m"
     if ! [ -x "$(command -v npm)" ]
     then
-        echo -e "\e[31m   Need to install NPM for Tina 3 Manager\e[0m\n"
+        echo -e "\e[31m   Need to install NPM for Erbah\e[0m\n"
     else
         npm version
     fi
@@ -52,7 +52,7 @@ check_environment() {
     echo -e "\n\e[36m - Angular version\e[0m"
     if ! [ -x "$(command -v npm)" ]
     then
-        echo -e "\e[31m   Need to install NPM for Tina 3 Manager\e[0m\n"
+        echo -e "\e[31m   Need to install NPM for Erbah\e[0m\n"
     else
         (
             cd $PROJECT_ROOT/ui/
@@ -184,7 +184,7 @@ function rpm_build {
 function rpm_publish {
     VERSION=$(version)
     echo -e "\n\e[36m - RPM Publish \e[0m"
-    scp ./build/${PROJECT_NAME}/rpms/${PROJECT_NAME}-${VERSION}-$RELEASE.noarch.rpm root@rpm-repository.dv.admin:/Centos/7/Packages/
+    #scp ./build/${PROJECT_NAME}/rpms/${PROJECT_NAME}-${VERSION}-$RELEASE.noarch.rpm root@rpm-repository.dv.admin:/Centos/7/Packages/
 }
 
 function test {
