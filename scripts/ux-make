@@ -1,0 +1,226 @@
+#! /bin/bash
+
+# Exit immediately if a pipeline (which may consist of a single simple command,
+# a list, or a compound command), exits with a non-zero status.
+set -e
+
+PROJECT_ROOT="/home/ux/dev"
+PROJECT_NAME="osc-tinman3"
+# TODO Find how to manage the concept of release number (different meaning
+# for nightly than others - can be provided from params or other ways)
+RELEASE=0
+
+# Shortcut to get current version
+version() {
+    (
+        cd $PROJECT_ROOT/
+        echo "$(grep "version" build.sbt | cut -d'"' -f2)"
+    )
+}
+
+# Check ennvironment
+check_environment() {
+    echo -e "\e[36m - OS version\e[0m"
+    cat /etc/centos-release
+
+    if [ "$PATH" == "" ]
+    then
+        export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+    else
+        export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:$PATH
+    fi
+
+    echo -e "\n\e[36m - Environment variables\e[0m"
+    env
+
+    echo -e "\n\e[36m - Java version\e[0m"
+    if ! [ -x "$(command -v java)" ]
+    then
+        echo -e "\e[31m   Need to install Java for Tina 3 Manager\e[0m\n"
+    else
+        java -version
+    fi
+
+    echo -e "\n\e[36m - Node version\e[0m"
+    if ! [ -x "$(command -v npm)" ]
+    then
+        echo -e "\e[31m   Need to install NPM for Tina 3 Manager\e[0m\n"
+    else
+        npm version
+    fi
+
+    echo -e "\n\e[36m - Angular version\e[0m"
+    if ! [ -x "$(command -v npm)" ]
+    then
+        echo -e "\e[31m   Need to install NPM for Tina 3 Manager\e[0m\n"
+    else
+        (
+            cd $PROJECT_ROOT/ui/
+            ng version
+        )
+    fi
+}
+
+function prepare {
+    echo -e "\n\e[36m - Prepare Environment \e[0m"
+    mkdir -p $PROJECT_ROOT/dist
+    mkdir -p $PROJECT_ROOT/build
+
+    echo -e "npm install..."
+    (
+        cd $PROJECT_ROOT/ui/
+        npm install
+    )
+}
+
+function clean {
+    echo -e "\n\e[36m - Clean repository directory \e[0m"
+    echo -ne '                                          (0%)\r'
+    rm -rf $PROJECT_ROOT/target
+    echo -ne '##########                                (25%)\r'
+    rm -rf $PROJECT_ROOT/dist
+    echo -ne '####################                      (50%)\r'
+    rm -rf $PROJECT_ROOT/build
+    echo -ne '##############################            (75%)\r'
+    rm -rf $PROJECT_ROOT/ui/node_modules
+    echo -ne '########################################  (100%)\r'
+    echo -ne '\n'
+}
+
+function front_test {
+    echo -e "\n\e[36m - Frontend Tests \e[0m"
+    (
+        cd $PROJECT_ROOT/ui/
+        ng test
+    )
+}
+
+function back_test {
+    echo -e "\n\e[36m - Backend Tests \e[0m"
+    (
+        cd $PROJECT_ROOT/
+        sbt test
+    )
+}
+
+function front_build {
+    echo -e "\n\e[36m - Frontend Build \e[0m"
+    (
+        cd $PROJECT_ROOT/ui/
+        ng build
+    )
+}
+
+function back_build {
+    echo -e "\n\e[36m - Backend Build \e[0m"
+    (
+        cd $PROJECT_ROOT/
+        sbt compile
+    )
+}
+
+function front_dist {
+    VERSION=$(version)
+    echo -e "\n\e[36m - Frontend Dist \e[0m"
+    (
+        cd $PROJECT_ROOT/ui/
+        cd dist
+        tar cvzf $PROJECT_ROOT/dist/${PROJECT_NAME}-${VERSION}-ui.tar.gz *
+    )
+}
+
+function back_dist {
+    VERSION=$(version)
+    echo -e "\n\e[36m - Backend Dist \e[0m"
+    (
+        cd $PROJECT_ROOT/
+        sbt dist
+    )
+    # SBT Jarfile needs to be rewritten to remove files which are useless
+    # or may break the RPM generation
+    (
+        cd $PROJECT_ROOT/target/universal/
+        unzip ${PROJECT_NAME}-${VERSION}.zip
+        rm -f ${PROJECT_NAME}-${VERSION}/README.md
+        rm -rf ${PROJECT_NAME}-${VERSION}/share/
+        rm -f ${PROJECT_NAME}-${VERSION}/bin/${PROJECT_NAME}.bat
+        mv ${PROJECT_NAME}-${VERSION} usr
+        rm ${PROJECT_NAME}-${VERSION}.zip
+        zip -r $PROJECT_ROOT/dist/${PROJECT_NAME}-${VERSION}-back.zip usr
+    )
+}
+
+function rpm_build {
+    VERSION=$(version)
+    # Create the Togo project, then append all files to put in the RPM in the
+    # Togo project
+    echo -e "\n\e[36m - RPM Build \e[0m"
+    (
+        cd $PROJECT_ROOT/build/
+        togo configure -n 'Outscale' -e 'ux@outscale.com'
+        togo project create ${PROJECT_NAME}
+        cd ${PROJECT_NAME}
+        mkdir -p root/var/${PROJECT_NAME}
+        unzip $PROJECT_ROOT/dist/${PROJECT_NAME}-${VERSION}-back.zip
+        mv usr root/
+        mkdir -p root/usr/share/${PROJECT_NAME}
+        cp $PROJECT_ROOT/scripts/schema.sql root/usr/share/${PROJECT_NAME}/
+        cp $PROJECT_ROOT/scripts/dev-data.sql root/usr/share/${PROJECT_NAME}/
+        tar xzf $PROJECT_ROOT/dist/${PROJECT_NAME}-${VERSION}-ui.tar.gz -C root/var/${PROJECT_NAME}
+
+        togo file exclude root/usr/bin
+        togo file exclude root/usr/lib
+
+        rm -f spec/header
+        cat /home/ux/etc/rpm_header.tpl |
+            sed -e "s/__VERSION__/$VERSION/" | \
+            sed -e "s/__RELEASE__/$RELEASE/" > spec/header
+
+        echo "Building package in $PWD/rpms/"
+        togo build package
+    )
+}
+
+function rpm_publish {
+    VERSION=$(version)
+    echo -e "\n\e[36m - RPM Publish \e[0m"
+    scp ./build/${PROJECT_NAME}/rpms/${PROJECT_NAME}-${VERSION}-$RELEASE.noarch.rpm root@rpm-repository.dv.admin:/Centos/7/Packages/
+}
+
+function test {
+    front_test
+    back_test
+}
+
+function build {
+    front_build
+    back_build
+}
+
+function dist {
+    front_dist
+    back_dist
+}
+
+function publish {
+    version="$1"
+    if [ "$version" = "" ]
+    then
+        echo -e "\e[31m   Version number is mandatory.\e[0m\n"
+    fi
+    rpm_build
+    rpm_publish
+}
+
+action=$(echo $1  | tr '[:upper:]' '[:lower:]')
+shift
+
+if [ "$action" = "release" ]
+then
+    RELEASE=$1
+    shift
+    action=$(echo $1  | tr '[:upper:]' '[:lower:]')
+    shift
+fi
+
+$action "$@"
