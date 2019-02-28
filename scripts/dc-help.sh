@@ -103,6 +103,7 @@ services:
           - "$port_back_web:9000"
         volumes:
           - ${BASE_PATH}:/home/ux/dev
+          - /etc/resolv.conf:/etc/resolv.conf
 
     ${CONTAINER_DB_NAME}:
         image: mariadb
